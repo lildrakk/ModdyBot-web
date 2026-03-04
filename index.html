@@ -3,11 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ModdyBot</title>
+<title>ModdyBot - Control Total para tu Servidor</title>
 <style>
+/* Variables de color */
+:root {
+  --color-primario: #00ffff;
+  --color-secundario: #1e90ff;
+  --color-acento: #ff5ef7;
+  --color-texto: #eee;
+  --color-bg: #0a0a0a;
+}
+
 /* Reset y general */
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:Consolas,Monaco,'Courier New',monospace;background:#0a0a0a;color:#eee;scroll-behavior:smooth;overflow-x:hidden;}
+body{font-family:Consolas,Monaco,'Courier New',monospace;background:var(--color-bg);color:var(--color-texto);scroll-behavior:smooth;overflow-x:hidden;}
 a{text-decoration:none;color:inherit;}
 
 /* Fondo partículas */
@@ -15,50 +24,51 @@ a{text-decoration:none;color:inherit;}
 .particle{position:absolute;border-radius:50%;background:rgba(255,255,255,0.6);width:2px;height:2px;animation:float linear infinite;}
 @keyframes float{0%{transform:translateY(0);}100%{transform:translateY(-110vh);}}
 
-/* Header */
-header{text-align:center;padding:120px 20px 60px;position:relative;background:linear-gradient(180deg,#050505,#101010);}
-header img{width:200px;margin-bottom:20px;border-radius:15px;box-shadow:0 0 35px #00ffff;animation:floatLogo 4s ease-in-out infinite alternate;}
+/* Header Hero */
+header{text-align:center;padding:120px 20px 60px 20px;background:linear-gradient(180deg,#050505,#101010);position:relative;}
+header img{width:220px;margin-bottom:20px;border-radius:20px;box-shadow:0 0 40px var(--color-primario);animation:floatLogo 4s ease-in-out infinite alternate;}
 @keyframes floatLogo{0%{transform:translateY(0);}100%{transform:translateY(-20px);}}
-header h1{font-size:3.8em;font-weight:bold;background:linear-gradient(90deg,#00ffff,#ff5ef7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 20px #00ffff;animation:glow 2s infinite alternate;}
-header p{font-size:1.4em;max-width:850px;margin:0 auto 30px auto;line-height:1.6;color:#ccc;}
-.cta-button{display:inline-block;padding:15px 40px;font-size:1.2em;color:#fff;background:linear-gradient(90deg,#00ffff,#ff5ef7);border-radius:25px;box-shadow:0 0 25px #00ffff;transition:0.6s;animation:pulse 2s infinite;}
-.cta-button:hover{background:linear-gradient(90deg,#ff5ef7,#00ffff);box-shadow:0 0 60px #00ffff;transform:scale(1.1);}
-@keyframes glow{0%{text-shadow:0 0 15px #00ffff;}100%{text-shadow:0 0 50px #ff5ef7;}}
-@keyframes pulse{0%{box-shadow:0 0 25px #00ffff;}50%{box-shadow:0 0 50px #ff5ef7;}100%{box-shadow:0 0 25px #00ffff;}}
+header h1{font-size:4em;font-weight:bold;background:linear-gradient(90deg,var(--color-primario),var(--color-acento));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 25px var(--color-primario);animation:glow 2s infinite alternate;}
+header p{font-size:1.5em;max-width:900px;margin:0 auto 30px auto;line-height:1.6;color:#ccc;}
+.cta-button{display:inline-block;margin:10px;padding:15px 40px;font-size:1.2em;color:#fff;background:linear-gradient(90deg,var(--color-primario),var(--color-acento));border-radius:25px;box-shadow:0 0 30px var(--color-primario);transition:0.6s;animation:pulse 2s infinite;}
+.cta-button:hover{background:linear-gradient(90deg,var(--color-acento),var(--color-primario));box-shadow:0 0 60px var(--color-primario);transform:scale(1.1);}
+@keyframes glow{0%{text-shadow:0 0 15px var(--color-primario);}100%{text-shadow:0 0 50px var(--color-acento);}}
+@keyframes pulse{0%{box-shadow:0 0 25px var(--color-primario);}50%{box-shadow:0 0 50px var(--color-acento);}100%{box-shadow:0 0 25px var(--color-primario);}}
 
 /* Nav fijo animado */
-nav{position:fixed;top:0;left:0;width:100%;background:rgba(10,10,10,0.85);padding:15px;display:flex;justify-content:center;gap:25px;z-index:999;border-bottom:1px solid #00ffff;}
-nav a{color:#00ffff;font-weight:bold;transition:0.5s;animation:glowNav 2s infinite alternate;}
-nav a:hover{color:#fff;text-shadow:0 0 20px #ff5ef7;transform:scale(1.1);}
-@keyframes glowNav{0%{text-shadow:0 0 5px #00ffff;}100%{text-shadow:0 0 25px #ff5ef7;}}
+nav{position:fixed;top:0;left:0;width:100%;background:rgba(10,10,10,0.85);padding:15px;display:flex;justify-content:center;gap:25px;z-index:999;border-bottom:1px solid var(--color-primario);}
+nav a{color:var(--color-primario);font-weight:bold;transition:0.5s;animation:glowNav 2s infinite alternate;}
+nav a:hover{color:#fff;text-shadow:0 0 20px var(--color-acento);transform:scale(1.1);}
+@keyframes glowNav{0%{text-shadow:0 0 5px var(--color-primario);}100%{text-shadow:0 0 25px var(--color-acento);}}
 
 /* Secciones */
-section{padding:80px 20px;}
-section h2{font-size:3em;color:#00ffff;margin-bottom:20px;text-shadow:0 0 15px #ff5ef7;animation:neon 2s infinite alternate;text-align:center;}
+section{padding:100px 20px;}
+section h2{font-size:3em;color:var(--color-primario);margin-bottom:20px;text-shadow:0 0 15px var(--color-acento);animation:neon 2s infinite alternate;text-align:center;}
 section p{max-width:900px;margin:0 auto;font-size:1.2em;line-height:1.7;color:#ccc;text-align:center;}
 
 /* Comandos */
 .commands{display:flex;flex-wrap:wrap;justify-content:center;gap:30px;}
-.command{background:linear-gradient(145deg,#111,#1a1a1a);border-radius:20px;width:280px;padding:25px;text-align:center;box-shadow:0 0 40px rgba(0,170,255,0.7);transition:transform 0.7s,box-shadow 0.7s;}
+.command{background:linear-gradient(145deg,#111,#1a1a1a);border-radius:20px;width:280px;padding:25px;text-align:center;box-shadow:0 0 40px rgba(0,170,255,0.7);transition:transform 0.7s,box-shadow 0.7s;animation:slideUp 0.8s;}
 .command:hover{transform:scale(1.08);box-shadow:0 0 70px rgba(255,94,247,0.85);}
-.command h3{color:#00ffff;margin-bottom:12px;text-shadow:0 0 12px #ff5ef7;}
+.command h3{color:var(--color-primario);margin-bottom:12px;text-shadow:0 0 12px var(--color-acento);}
 .command p{color:#ccc;margin:8px 0;}
-.command button{display:inline-block;margin-top:12px;padding:10px 22px;border-radius:15px;background:linear-gradient(90deg,#00ffff,#ff5ef7);color:#fff;font-weight:bold;box-shadow:0 0 25px #00ffff;transition:0.5s;cursor:pointer;animation:pulse 2s infinite;}
-.command button:hover{background:linear-gradient(90deg,#ff5ef7,#00ffff);box-shadow:0 0 60px #00ffff;transform:scale(1.08);}
+.command button{display:inline-block;margin-top:12px;padding:10px 22px;border-radius:15px;background:linear-gradient(90deg,var(--color-primario),var(--color-acento));color:#fff;font-weight:bold;box-shadow:0 0 25px var(--color-primario);transition:0.5s;cursor:pointer;animation:pulse 2s infinite;}
+.command button:hover{background:linear-gradient(90deg,var(--color-acento),var(--color-primario));box-shadow:0 0 60px var(--color-primario);transform:scale(1.08);}
+@keyframes slideUp{0%{transform:translateY(30px);opacity:0;}100%{transform:translateY(0);opacity:1;}}
 
 /* Modal */
 .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);justify-content:center;align-items:center;z-index:1000;}
 .modal-content{background:linear-gradient(145deg,#111,#1a1a1a);border-radius:25px;padding:30px;width:90%;max-width:650px;position:relative;box-shadow:0 0 70px rgba(0,170,255,0.85);transform:scale(0);opacity:0;transition:all 0.6s ease;}
 .modal-content.show{transform:scale(1);opacity:1;}
-.modal-content h3{color:#00ffff;margin-bottom:15px;text-shadow:0 0 15px #ff5ef7;}
+.modal-content h3{color:var(--color-primario);margin-bottom:15px;text-shadow:0 0 15px var(--color-acento);}
 .modal-content p{color:#ccc;line-height:1.6;margin-bottom:15px;}
 .modal-content .close{position:absolute;top:15px;right:15px;font-size:1.7em;color:#fff;cursor:pointer;transition:0.3s;}
-.modal-content .close:hover{color:#00ffff;transform:scale(1.2);}
-.modal-content .discord-link{display:inline-block;padding:12px 25px;border-radius:20px;background:linear-gradient(90deg,#00ffff,#ff5ef7);color:#fff;box-shadow:0 0 30px #00ffff;transition:0.5s;animation:pulse 2s infinite;}
-.modal-content .discord-link:hover{background:linear-gradient(90deg,#ff5ef7,#00ffff);box-shadow:0 0 60px #00ffff;transform:scale(1.05);}
+.modal-content .close:hover{color:var(--color-primario);transform:scale(1.2);}
+.modal-content .discord-link{display:inline-block;padding:12px 25px;border-radius:20px;background:linear-gradient(90deg,var(--color-primario),var(--color-acento));color:#fff;box-shadow:0 0 30px var(--color-primario);transition:0.5s;animation:pulse 2s infinite;}
+.modal-content .discord-link:hover{background:linear-gradient(90deg,var(--color-acento),var(--color-primario));box-shadow:0 0 60px var(--color-primario);transform:scale(1.05);}
 
 /* Footer */
-footer{text-align:center;padding:50px 20px;background:#0a0a0a;color:#777;font-size:0.95em;}
+footer{text-align:center;padding:50px 20px;background:var(--color-bg);color:#777;font-size:0.95em;}
 
 /* Responsive */
 @media(max-width:768px){header h1{font-size:2.8em;} .commands{flex-direction:column;align-items:center;} .command{width:90%;}}
@@ -70,30 +80,49 @@ footer{text-align:center;padding:50px 20px;background:#0a0a0a;color:#777;font-si
 
 <nav>
 <a href="#inicio">Inicio</a>
-<a href="#comandos">Comandos</a>
+<a href="#comandos1">Comandos 1</a>
+<a href="#comandos2">Comandos 2</a>
+<a href="#comandos3">Comandos 3</a>
 <a href="#soporte">Soporte</a>
 </nav>
 
 <header id="inicio">
 <img src="1logo.png" alt="Logo ModdyBot">
 <h1>ModdyBot</h1>
-<p>Bot completo de protección y gestión para servidores. Anti-Raid, Anti-Spam, Anti-Links, Backups, Reaction Roles y mucho más.</p>
-<a href="#comandos" class="cta-button">Ver Comandos</a>
+<p>Protege tu servidor y gestiona todo con facilidad. Anti-Raid, Anti-Spam, Anti-Links, Backups, Reaction Roles y más.</p>
+<a href="https://discord.com/oauth2/authorize?client_id=1450924184606740642&permissions=8&integration_type=0&scope=bot" target="_blank" class="cta-button">🤖 Invitar Bot</a>
+<a href="#comandos1" class="cta-button">Ver Comandos</a>
 </header>
 
-<section id="comandos">
-<h2>Comandos Destacados</h2>
+<!-- Sección Comandos 1 -->
+<section id="comandos1">
+<h2>Comandos de Seguridad</h2>
 <div class="commands">
 <div class="command"><h3>/verificacion_crear</h3><p>Crea un sistema de verificación con captcha anti-raid.</p><button class="open-modal" data-command="verificacion">Más info</button></div>
 <div class="command"><h3>/backup_crear / /backup_restaurar</h3><p>Genera y restaura backups del servidor.</p><button class="open-modal" data-command="backup">Más info</button></div>
+</div>
+</section>
+
+<!-- Sección Comandos 2 -->
+<section id="comandos2">
+<h2>Protección y Moderación</h2>
+<div class="commands">
 <div class="command"><h3>/antispam</h3><p>Protege el servidor de mensajes repetidos o spam masivo.</p><button class="open-modal" data-command="antispam">Más info</button></div>
 <div class="command"><h3>/antiraid</h3><p>Activa protección automática contra raids.</p><button class="open-modal" data-command="antiraid">Más info</button></div>
 <div class="command"><h3>/antilinks</h3><p>Bloquea enlaces no deseados automáticamente.</p><button class="open-modal" data-command="antilinks">Más info</button></div>
+</div>
+</section>
+
+<!-- Sección Comandos 3 -->
+<section id="comandos3">
+<h2>Gestión Avanzada</h2>
+<div class="commands">
 <div class="command"><h3>/blacklist / /unblacklist / /blacklistlist</h3><p>Gestiona usuarios prohibidos de forma segura.</p><button class="open-modal" data-command="blacklist">Más info</button></div>
 <div class="command"><h3>/rr_add / /rr_remove / /rr_list</h3><p>Gestiona reaction roles personalizadas fácilmente.</p><button class="open-modal" data-command="rr">Más info</button></div>
 </div>
 </section>
 
+<!-- Sección Soporte -->
 <section id="soporte">
 <h2>Soporte e Invitación</h2>
 <p>Únete al servidor de soporte o invita al bot a tu servidor.</p>
@@ -118,13 +147,20 @@ footer{text-align:center;padding:50px 20px;background:#0a0a0a;color:#777;font-si
 </footer>
 
 <script>
-// Scroll suave
-document.querySelector('.cta-button').addEventListener('click',e=>{
-  e.preventDefault();
-  document.getElementById('comandos').scrollIntoView({behavior:'smooth'});
+// Scroll suave para botones CTA
+document.querySelectorAll('.cta-button').forEach(btn=>{
+  btn.addEventListener('click',e=>{
+    e.preventDefault();
+    const target = btn.getAttribute('href');
+    if(target.startsWith("#")){
+      document.querySelector(target).scrollIntoView({behavior:'smooth'});
+    } else {
+      window.open(target,'_blank');
+    }
+  });
 });
 
-// Partículas
+// Partículas de fondo
 const particlesCount=200;
 const particlesContainer=document.getElementById('particles');
 for(let i=0;i<particlesCount;i++){
