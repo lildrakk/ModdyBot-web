@@ -22,7 +22,7 @@ body::before{
 100%{background-position:0 50%;}
 }
 
-/* PARTÍCULAS */
+/* PARTICULAS */
 #particles{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;pointer-events:none;}
 .particle{position:absolute;border-radius:50%;background:rgba(255,255,255,0.15);width:2px;height:2px;animation:float linear infinite;}
 @keyframes float{0%{transform:translateY(0);}100%{transform:translateY(-120vh);}}
@@ -44,9 +44,8 @@ nav a{color:#0ff;font-weight:bold;transition:0.5s;animation:glowNav 2s infinite 
 nav a:hover{color:#fff;text-shadow:0 0 25px #1e90ff;transform:scale(1.1);}
 @keyframes glowNav{0%{text-shadow:0 0 5px #0ff;}100%{text-shadow:0 0 25px #1e90ff;}}
 
-/* SECCIONES */
-section{padding:100px 20px;opacity:0;transform:translateY(40px);transition:0.8s ease;}
-section.visible{opacity:1;transform:translateY(0);}
+/* SECCIONES VISIBLES */
+section{padding:100px 20px;opacity:1;transform:translateY(0);transition:0.8s ease;}
 section h2{font-size:3em;color:#0ff;margin-bottom:25px;text-shadow:0 0 20px #1e90ff;text-align:center;}
 section p{max-width:950px;margin:0 auto;font-size:1.2em;line-height:1.7;color:#ccc;text-align:center;}
 
@@ -61,8 +60,7 @@ section p{max-width:950px;margin:0 auto;font-size:1.2em;line-height:1.7;color:#c
 
 /* PLANES */
 .plans{display:flex;flex-wrap:wrap;justify-content:center;gap:25px;margin-top:50px;}
-.plan{background:linear-gradient(145deg,#111,#1a1a1a);border-radius:25px;width:280px;padding:35px 20px;text-align:center;box-shadow:0 0 35px rgba(0,170,255,0.6);transition:transform 0.7s,opacity 0.7s;opacity:0;transform:translateY(50px);}
-.plan.show{opacity:1;transform:translateY(0);}
+.plan{background:linear-gradient(145deg,#111,#1a1a1a);border-radius:25px;width:280px;padding:35px 20px;text-align:center;box-shadow:0 0 35px rgba(0,170,255,0.6);transition:transform 0.7s,opacity 0.7s;opacity:1;transform:translateY(0);}
 .plan h2{font-size:1.8em;margin-bottom:10px;color:#0ff;text-shadow:0 0 12px #1e90ff;}
 .plan p{font-size:1.1em;margin:5px 0;color:#ccc;}
 .plan .price{font-size:2em;margin:15px 0;color:#0ff;font-weight:bold;}
@@ -191,21 +189,6 @@ for(let i=0;i<particlesCount;i++){
   particlesContainer.appendChild(p);
 }
 
-// PLANES Y SECCIONES AL SCROLL
-const plans=document.querySelectorAll('.plan');
-const sections=document.querySelectorAll('section');
-const observer = new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.classList.add('visible');
-      if(entry.target.classList.contains('plans')){
-        plans.forEach((p,i)=>setTimeout(()=>p.classList.add('show'),i*200));
-      }
-    }
-  });
-},{threshold:0.2});
-sections.forEach(sec=>observer.observe(sec));
-
 // MODAL
 const modal=document.getElementById('modal');
 const modalContent=document.getElementById('modal-content');
@@ -220,4 +203,19 @@ document.querySelectorAll('.open-modal').forEach(btn=>{
     switch(cmd){
       case'verificacion': modalTitle.textContent='/verificacion_crear'; modalDesc.textContent='Crea un sistema de verificación con captcha anti-raid. Fácil y seguro.'; break;
       case'backup': modalTitle.textContent='/backup_crear / /backup_restaurar'; modalDesc.textContent='Crea y restaura backups completas de tu servidor con seguridad y rapidez.'; break;
-      case'antispam': modalTitle.textContent='/antispam'; modalDesc.textContent='Protege el servidor de
+      case'antispam': modalTitle.textContent='/antispam'; modalDesc.textContent='Protege el servidor de spam masivo, mensajes repetidos y flood.'; break;
+      case'antiraid': modalTitle.textContent='/antiraid'; modalDesc.textContent='Activa protección automática contra raids y ataques masivos.'; break;
+      case'antilinks': modalTitle.textContent='/antilinks'; modalDesc.textContent='Bloquea automáticamente links no deseados y phishing.'; break;
+      case'blacklist': modalTitle.textContent='/blacklist / /unblacklist / /blacklistlist'; modalDesc.textContent='Gestiona usuarios prohibidos y protege tu servidor.'; break;
+      case'rr': modalTitle.textContent='/rr_add / /rr_remove / /rr_list'; modalDesc.textContent='Gestiona roles mediante reacciones de manera automática.'; break;
+    }
+  });
+});
+document.querySelector('.close').addEventListener('click',()=>{
+  modal.classList.remove('show');
+  modalContent.classList.remove('show');
+});
+</script>
+
+</body>
+</html>
