@@ -3,15 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ModdyBot Dashboard</title>
+<title>ModdyBot</title>
 <style>
 /* Reset y general */
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:Consolas,Monaco,'Courier New',monospace;background:#0a0a0a;color:#eee;scroll-behavior:smooth;overflow-x:hidden;}
 a{text-decoration:none;color:inherit;}
-section, header, footer{opacity:0;transform:translateY(60px);transition:all 1.2s ease-in-out;}
 
-/* Fondo partículas estilo tech */
+/* Fondo partículas */
 #particles{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;pointer-events:none;}
 .particle{position:absolute;border-radius:50%;background:rgba(255,255,255,0.6);width:2px;height:2px;animation:float linear infinite;}
 @keyframes float{0%{transform:translateY(0);}100%{transform:translateY(-110vh);}}
@@ -28,22 +27,17 @@ header p{font-size:1.4em;max-width:850px;margin:0 auto 30px auto;line-height:1.6
 @keyframes pulse{0%{box-shadow:0 0 25px #00ffff;}50%{box-shadow:0 0 50px #ff5ef7;}100%{box-shadow:0 0 25px #00ffff;}}
 
 /* Nav fijo animado */
-nav{position:fixed;top:0;left:0;width:100%;background:rgba(10,10,10,0.85);padding:15px;display:flex;justify-content:center;gap:25px;z-index:999;border-bottom:1px solid #00ffff;animation:slideNav 1s ease-out forwards;opacity:0;transform:translateY(-60px);}
-@keyframes slideNav{0%{opacity:0;transform:translateY(-60px);}100%{opacity:1;transform:translateY(0);}}
+nav{position:fixed;top:0;left:0;width:100%;background:rgba(10,10,10,0.85);padding:15px;display:flex;justify-content:center;gap:25px;z-index:999;border-bottom:1px solid #00ffff;}
 nav a{color:#00ffff;font-weight:bold;transition:0.5s;animation:glowNav 2s infinite alternate;}
-nav a:hover{color:#fff;text-shadow:0 0 20px #00ffff;transform:scale(1.05);}
+nav a:hover{color:#fff;text-shadow:0 0 20px #ff5ef7;transform:scale(1.1);}
 @keyframes glowNav{0%{text-shadow:0 0 5px #00ffff;}100%{text-shadow:0 0 25px #ff5ef7;}}
 
 /* Secciones */
-section{padding:80px 20px;transition:opacity 1s, transform 1s;}
+section{padding:80px 20px;}
 section h2{font-size:3em;color:#00ffff;margin-bottom:20px;text-shadow:0 0 15px #ff5ef7;animation:neon 2s infinite alternate;text-align:center;}
 section p{max-width:900px;margin:0 auto;font-size:1.2em;line-height:1.7;color:#ccc;text-align:center;}
-.discord-links{margin-top:30px;display:flex;flex-wrap:wrap;justify-content:center;gap:20px;}
-.discord-links a{display:flex;align-items:center;gap:10px;padding:12px 25px;background:linear-gradient(90deg,#00ffff,#ff5ef7);border-radius:15px;color:#fff;font-weight:bold;box-shadow:0 0 25px #00ffff;transition:0.5s;animation:pulse 2s infinite;}
-.discord-links a:hover{background:linear-gradient(90deg,#ff5ef7,#00ffff);box-shadow:0 0 60px #00ffff;transform:scale(1.05);}
-@keyframes neon{0%{text-shadow:0 0 15px #00ffff;}100%{text-shadow:0 0 50px #ff5ef7;}}
 
-/* Planes comandos */
+/* Comandos */
 .commands{display:flex;flex-wrap:wrap;justify-content:center;gap:30px;}
 .command{background:linear-gradient(145deg,#111,#1a1a1a);border-radius:20px;width:280px;padding:25px;text-align:center;box-shadow:0 0 40px rgba(0,170,255,0.7);transition:transform 0.7s,box-shadow 0.7s;}
 .command:hover{transform:scale(1.08);box-shadow:0 0 70px rgba(255,94,247,0.85);}
@@ -77,7 +71,6 @@ footer{text-align:center;padding:50px 20px;background:#0a0a0a;color:#777;font-si
 <nav>
 <a href="#inicio">Inicio</a>
 <a href="#comandos">Comandos</a>
-<a href="#dashboard">Dashboard</a>
 <a href="#soporte">Soporte</a>
 </nav>
 
@@ -85,87 +78,26 @@ footer{text-align:center;padding:50px 20px;background:#0a0a0a;color:#777;font-si
 <img src="1logo.png" alt="Logo ModdyBot">
 <h1>ModdyBot</h1>
 <p>Bot completo de protección y gestión para servidores. Anti-Raid, Anti-Spam, Anti-Links, Backups, Reaction Roles y mucho más.</p>
-<a href="#comandos" class="cta-button" id="verComandosBtn">Ver Comandos</a>
+<a href="#comandos" class="cta-button">Ver Comandos</a>
 </header>
 
 <section id="comandos">
 <h2>Comandos Destacados</h2>
 <div class="commands">
-<div class="command">
-<h3>/verificacion_crear</h3>
-<p>Crea un sistema de verificación con captcha para nuevos miembros.</p>
-<button class="open-modal" data-command="verificacion">Más info</button>
-</div>
-
-<div class="command">
-<h3>/backup_crear / /backup_restaurar</h3>
-<p>Genera y restaura backups completas del servidor.</p>
-<button class="open-modal" data-command="backup">Más info</button>
-</div>
-
-<div class="command">
-<h3>/antispam</h3>
-<p>Protege tu servidor de spam de mensajes repetidos.</p>
-<button class="open-modal" data-command="antispam">Más info</button>
-</div>
-
-<div class="command">
-<h3>/antiraid</h3>
-<p>Activa protección anti-raid automática para tu servidor.</p>
-<button class="open-modal" data-command="antiraid">Más info</button>
-</div>
-
-<div class="command">
-<h3>/antilinks</h3>
-<p>Bloquea enlaces no deseados en el servidor.</p>
-<button class="open-modal" data-command="antilinks">Más info</button>
-</div>
-
-<div class="command">
-<h3>/blacklist / /unblacklist / /blacklistlist</h3>
-<p>Gestiona usuarios prohibidos en tu servidor de forma segura.</p>
-<button class="open-modal" data-command="blacklist">Más info</button>
-</div>
-
-<div class="command">
-<h3>/rr_add / /rr_remove / /rr_list</h3>
-<p>Gestiona reaction roles de manera rápida y sencilla.</p>
-<button class="open-modal" data-command="rr">Más info</button>
-</div>
-</div>
-</section>
-
-<section id="dashboard">
-<h2>Dashboard Simulado</h2>
-<p>Visualiza la información del servidor y del bot de forma clara: usuarios verificados, backups disponibles, actividad anti-raid y anti-spam, reaction roles configurados y más.</p>
-<div class="commands">
-<div class="command">
-<h3>Usuarios Verificados</h3>
-<p>1200 miembros verificados mediante captcha.</p>
-</div>
-<div class="command">
-<h3>Backups</h3>
-<p>3 backups recientes listas para restaurar.</p>
-</div>
-<div class="command">
-<h3>Actividad Anti-Raid</h3>
-<p>Protección activa contra 15 intentos de raid recientes.</p>
-</div>
-<div class="command">
-<h3>Anti-Spam</h3>
-<p>Mensajes spam bloqueados: 432</p>
-</div>
-<div class="command">
-<h3>Reaction Roles</h3>
-<p>Roles configurados: 12</p>
-</div>
+<div class="command"><h3>/verificacion_crear</h3><p>Crea un sistema de verificación con captcha anti-raid.</p><button class="open-modal" data-command="verificacion">Más info</button></div>
+<div class="command"><h3>/backup_crear / /backup_restaurar</h3><p>Genera y restaura backups del servidor.</p><button class="open-modal" data-command="backup">Más info</button></div>
+<div class="command"><h3>/antispam</h3><p>Protege el servidor de mensajes repetidos o spam masivo.</p><button class="open-modal" data-command="antispam">Más info</button></div>
+<div class="command"><h3>/antiraid</h3><p>Activa protección automática contra raids.</p><button class="open-modal" data-command="antiraid">Más info</button></div>
+<div class="command"><h3>/antilinks</h3><p>Bloquea enlaces no deseados automáticamente.</p><button class="open-modal" data-command="antilinks">Más info</button></div>
+<div class="command"><h3>/blacklist / /unblacklist / /blacklistlist</h3><p>Gestiona usuarios prohibidos de forma segura.</p><button class="open-modal" data-command="blacklist">Más info</button></div>
+<div class="command"><h3>/rr_add / /rr_remove / /rr_list</h3><p>Gestiona reaction roles personalizadas fácilmente.</p><button class="open-modal" data-command="rr">Más info</button></div>
 </div>
 </section>
 
 <section id="soporte">
 <h2>Soporte e Invitación</h2>
 <p>Únete al servidor de soporte o invita al bot a tu servidor.</p>
-<div class="discord-links">
+<div class="commands discord-links">
 <a href="https://discord.gg/qrMnzGztm3" target="_blank">💬 Servidor de soporte</a>
 <a href="https://discord.com/oauth2/authorize?client_id=1450924184606740642&permissions=8&integration_type=0&scope=bot" target="_blank">🤖 Invitar ModdyBot</a>
 </div>
@@ -186,37 +118,25 @@ footer{text-align:center;padding:50px 20px;background:#0a0a0a;color:#777;font-si
 </footer>
 
 <script>
-// Scroll lento para ver comandos
-document.getElementById('verComandosBtn').addEventListener('click',e=>{
-e.preventDefault();
-document.getElementById('comandos').scrollIntoView({behavior:'smooth'});
+// Scroll suave
+document.querySelector('.cta-button').addEventListener('click',e=>{
+  e.preventDefault();
+  document.getElementById('comandos').scrollIntoView({behavior:'smooth'});
 });
 
 // Partículas
 const particlesCount=200;
 const particlesContainer=document.getElementById('particles');
 for(let i=0;i<particlesCount;i++){
-const p=document.createElement('div');
-p.classList.add('particle');
-p.style.left=Math.random()*100+'vw';
-p.style.top=Math.random()*100+'vh';
-p.style.width=(Math.random()*3+1)+'px';
-p.style.height=(Math.random()*3+1)+'px';
-p.style.animationDuration=(Math.random()*20+10)+'s';
-particlesContainer.appendChild(p);
+  const p=document.createElement('div');
+  p.classList.add('particle');
+  p.style.left=Math.random()*100+'vw';
+  p.style.top=Math.random()*100+'vh';
+  p.style.width=(Math.random()*3+1)+'px';
+  p.style.height=(Math.random()*3+1)+'px';
+  p.style.animationDuration=(Math.random()*20+10)+'s';
+  particlesContainer.appendChild(p);
 }
-document.addEventListener('mousemove',e=>{
-const particle=document.createElement('div');
-particle.classList.add('particle');
-particle.style.left=e.clientX+'px';
-particle.style.top=e.clientY+'px';
-particle.style.width='2px';
-particle.style.height='2px';
-particle.style.background='rgba(255,255,255,0.6)';
-particle.style.animation='float 10s linear forwards';
-particlesContainer.appendChild(particle);
-setTimeout(()=>particlesContainer.removeChild(particle),1000);
-});
 
 // Modal
 const modal=document.getElementById('modal');
@@ -224,31 +144,27 @@ const modalContent=document.getElementById('modal-content');
 const modalTitle=document.getElementById('modal-title');
 const modalDesc=document.getElementById('modal-desc');
 const modalLink=document.getElementById('modal-link');
+
 document.querySelectorAll('.open-modal').forEach(btn=>{
-btn.addEventListener('click',e=>{
-e.preventDefault();
-const cmd=btn.dataset.command;
-switch(cmd){
-case'verificacion':modalTitle.textContent='/verificacion_crear';modalDesc.textContent='Crea un sistema de verificación con captcha anti-raid. Fácil de usar y completamente seguro.';modalLink.href='https://discord.gg/qrMnzGztm3';break;
-case'backup':modalTitle.textContent='/backup_crear / /backup_restaurar';modalDesc.textContent='Crea backups completas de tu servidor y restaura cuando lo necesites.';modalLink.href='https://discord.gg/qrMnzGztm3';break;
-case'antispam':modalTitle.textContent='/antispam';modalDesc.textContent='Protege tu servidor de spam masivo automáticamente.';modalLink.href='https://discord.gg/qrMnzGztm3';break;
-case'antiraid':modalTitle.textContent='/antiraid';modalDesc.textContent='Activa protección anti-raid y detecta intrusos de forma automática.';modalLink.href='https://discord.gg/qrMnzGztm3';break;
-case'antilinks':modalTitle.textContent='/antilinks';modalDesc.textContent='Bloquea enlaces no deseados automáticamente para mantener el servidor seguro.';modalLink.href='https://discord.gg/qrMnzGztm3';break;
-case'blacklist':modalTitle.textContent='/blacklist / /unblacklist / /blacklistlist';modalDesc.textContent='Gestiona usuarios prohibidos por servidor de forma segura y eficiente.';modalLink.href='https://discord.gg/qrMnzGztm3';break;
-case'rr':modalTitle.textContent='/rr_add / /rr_remove / /rr_list';modalDesc.textContent='Gestiona reaction roles para roles personalizados de manera rápida.';modalLink.href='https://discord.gg/qrMnzGztm3';break;
-}
-modal.classList.add('show');
+  btn.addEventListener('click',e=>{
+    e.preventDefault();
+    const cmd=btn.dataset.command;
+    switch(cmd){
+      case'verificacion': modalTitle.textContent='/verificacion_crear'; modalDesc.textContent='Crea un sistema de verificación con captcha anti-raid. Fácil de usar y completamente seguro.'; break;
+      case'backup': modalTitle.textContent='/backup_crear / /backup_restaurar'; modalDesc.textContent='Crea backups completas de tu servidor y restaura cuando lo necesites.'; break;
+      case'antispam': modalTitle.textContent='/antispam'; modalDesc.textContent='Protege tu servidor de spam masivo automáticamente.'; break;
+      case'antiraid': modalTitle.textContent='/antiraid'; modalDesc.textContent='Activa protección anti-raid y detecta intrusos de forma automática.'; break;
+      case'antilinks': modalTitle.textContent='/antilinks'; modalDesc.textContent='Bloquea enlaces no deseados automáticamente para mantener el servidor seguro.'; break;
+      case'blacklist': modalTitle.textContent='/blacklist / /unblacklist / /blacklistlist'; modalDesc.textContent='Gestiona usuarios prohibidos por servidor de forma segura y eficiente.'; break;
+      case'rr': modalTitle.textContent='/rr_add / /rr_remove / /rr_list'; modalDesc.textContent='Gestiona reaction roles para roles personalizados de manera rápida.'; break;
+    }
+    modal.classList.add('show');
+  });
 });
-});
+
 document.querySelector('.close').addEventListener('click',()=>{modal.classList.remove('show');});
 window.addEventListener('click',e=>{if(e.target==modal) modal.classList.remove('show');});
-
-// Slide-in secciones
-const sections=document.querySelectorAll('section,header,nav');
-const observer=new IntersectionObserver(entries=>{
-entries.forEach(entry=>{if(entry.isIntersecting){entry.target.style.opacity=1;entry.target.style.transform='translateY(0)';}});
-},{threshold:0.1});
-sections.forEach(sec=>observer.observe(sec));
 </script>
+
 </body>
-  </html>
+</html>
