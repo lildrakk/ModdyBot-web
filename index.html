@@ -30,7 +30,6 @@ overflow-x:hidden;
 a{text-decoration:none;color:inherit;}
 
 /* Partículas */
-
 #particles{
 position:fixed;
 top:0;
@@ -56,7 +55,6 @@ animation:float linear infinite;
 }
 
 /* NAV */
-
 nav{
 position:fixed;
 top:0;
@@ -79,6 +77,7 @@ transition:0.4s;
 opacity:0;
 transform:translateY(-20px);
 animation:navSlide 1.5s forwards;
+cursor:pointer;
 }
 
 nav a:nth-child(1){animation-delay:0.3s;}
@@ -100,7 +99,6 @@ transform:translateY(0);
 }
 
 /* HEADER */
-
 header{
 text-align:center;
 padding:120px 20px 60px;
@@ -154,9 +152,16 @@ box-shadow:0 0 60px var(--color-acento);
 }
 
 /* SECCIONES */
-
 section{
 padding:100px 20px;
+opacity:0;
+transform:translateY(30px);
+transition:1s ease;
+}
+
+section.visible{
+opacity:1;
+transform:translateY(0);
 }
 
 section h2{
@@ -177,7 +182,6 @@ text-align:center;
 }
 
 /* COMANDOS */
-
 .commands{
 display:flex;
 flex-wrap:wrap;
@@ -193,7 +197,14 @@ width:280px;
 padding:25px;
 text-align:center;
 box-shadow:0 0 40px rgba(0,170,255,0.7);
-transition:0.5s;
+transition:0.5s, transform 0.6s;
+opacity:0;
+transform:translateY(20px);
+}
+
+.command.visible{
+opacity:1;
+transform:translateY(0);
 }
 
 .command:hover{
@@ -217,22 +228,38 @@ cursor:pointer;
 }
 
 /* INFO BOT */
-
 #info{
-background:linear-gradient(180deg,#0b0b0b,#111);
+background:none;
 }
 
 .info-box{
 max-width:900px;
 margin:auto;
-background:linear-gradient(145deg,#111,#1a1a1a);
-padding:40px;
-border-radius:20px;
-box-shadow:0 0 50px rgba(0,255,255,0.3);
+padding:0;
+box-shadow:none;
+}
+
+.info-box ul{
+list-style:none;
+padding:0;
+margin-top:20px;
+}
+
+.info-box ul li{
+margin:12px 0;
+font-size:1.2em;
+color:#ccc;
+position:relative;
+padding-left:25px;
+}
+
+.info-box ul li::before{
+content:"🔹";
+position:absolute;
+left:0;
 }
 
 /* SOPORTE */
-
 .discord-links{
 display:flex;
 justify-content:center;
@@ -248,7 +275,6 @@ box-shadow:0 0 25px var(--color-primario);
 }
 
 /* FOOTER */
-
 footer{
 text-align:center;
 padding:40px;
@@ -256,18 +282,14 @@ color:#777;
 }
 
 /* RESPONSIVE */
-
 @media(max-width:768px){
-
 .commands{
 flex-direction:column;
 align-items:center;
 }
-
 .command{
 width:90%;
 }
-
 }
 
 </style>
@@ -278,236 +300,165 @@ width:90%;
 <div id="particles"></div>
 
 <nav>
-
-<a href="#inicio">Inicio</a>
-
-<a href="#comandos1">Comandos del Bot</a>
-
-<a href="#info">¿Quiénes Somos?</a>
-
-<a href="#soporte">Soporte</a>
-
+<a data-target="inicio">Inicio</a>
+<a data-target="comandos1">Comandos del Bot</a>
+<a data-target="info">¿Quiénes Somos?</a>
+<a data-target="soporte">Soporte</a>
 </nav>
 
 <header id="inicio">
-
 <img src="1logo.png">
-
 <h1>ModdyBot</h1>
-
 <p>
 Protege tu servidor y gestiona todo con facilidad.
 Anti-Raid, Anti-Spam, Anti-Links, Backups, Reaction Roles y más.
 </p>
-
 <a href="https://discord.com/oauth2/authorize?client_id=1450924184606740642&permissions=8&scope=bot" class="cta-button">🤖 Invitar Bot</a>
-
-<a href="#comandos1" class="cta-button">Ver Comandos</a>
-
+<a data-target="comandos1" class="cta-button">Ver Comandos</a>
 </header>
 
-
 <section id="comandos1">
-
 <h2>Comandos de Seguridad</h2>
-
 <div class="commands">
-
 <div class="command">
-
 <h3>/verificacion_crear</h3>
-
 <p>Crea verificación con captcha anti-raid.</p>
-
 <button>Más info</button>
-
 </div>
-
 <div class="command">
-
 <h3>/backup_crear / /backup_restaurar</h3>
-
 <p>Genera y restaura backups del servidor.</p>
-
 <button>Más info</button>
-
 </div>
-
 </div>
-
 </section>
-
 
 <section id="comandos2">
-
 <h2>Protección y Moderación</h2>
-
 <div class="commands">
-
 <div class="command">
-
 <h3>/antispam</h3>
-
 <p>Protege contra spam.</p>
-
 <button>Más info</button>
-
 </div>
-
 <div class="command">
-
 <h3>/antiraid</h3>
-
 <p>Protección automática contra raids.</p>
-
 <button>Más info</button>
-
 </div>
-
 <div class="command">
-
 <h3>/antilinks</h3>
-
 <p>Bloquea enlaces no deseados.</p>
-
 <button>Más info</button>
-
 </div>
-
 </div>
-
 </section>
-
 
 <section id="comandos3">
-
 <h2>Gestión Avanzada</h2>
-
 <div class="commands">
-
 <div class="command">
-
 <h3>/blacklist</h3>
-
 <p>Gestiona usuarios bloqueados.</p>
-
 <button>Más info</button>
-
 </div>
-
 <div class="command">
-
 <h3>/rr_add / /rr_remove</h3>
-
 <p>Gestiona reaction roles.</p>
-
 <button>Más info</button>
-
 </div>
-
 </div>
-
 </section>
-
 
 <section id="info">
-
 <h2>¿Quiénes Somos?</h2>
-
 <div class="info-box">
-
 <p>
-
 <b>NebulaBots Studio</b> es un equipo dedicado al desarrollo de bots de Discord y herramientas para comunidades online.
-
 Nuestro objetivo es ofrecer sistemas avanzados de automatización, seguridad y gestión para servidores.
-
 </p>
-
-<br>
-
 <p>
-
 <b>ModdyBot</b> es uno de nuestros proyectos principales.
-
 Este bot está diseñado para ofrecer protección completa a servidores de Discord mediante sistemas como:
-
 </p>
-
-<br>
-
+<ul>
+<li>Anti-Raid automático</li>
+<li>Sistema Anti-Spam inteligente</li>
+<li>Bloqueo de enlaces</li>
+<li>Backups completos del servidor</li>
+<li>Reaction Roles personalizadas</li>
+<li>Sistema de verificación con captcha</li>
+</ul>
 <p>
-
-🔹 Anti-Raid automático  
-🔹 Sistema Anti-Spam inteligente  
-🔹 Bloqueo de enlaces  
-🔹 Backups completos del servidor  
-🔹 Reaction Roles personalizadas  
-🔹 Sistema de verificación con captcha  
-
-</p>
-
-<br>
-
-<p>
-
 Nuestro objetivo es ofrecer una herramienta potente pero fácil de usar para administradores de servidores.
-
 Seguimos desarrollando nuevas funciones constantemente para mejorar la seguridad y gestión de comunidades.
-
 </p>
-
 </div>
-
 </section>
-
 
 <section id="soporte">
-
 <h2>Soporte e Invitación</h2>
-
 <p>Únete a nuestro servidor de soporte o invita el bot.</p>
-
 <div class="discord-links">
-
 <a href="https://discord.gg/qrMnzGztm3">💬 Servidor de soporte</a>
-
 <a href="https://discord.com/oauth2/authorize?client_id=1450924184606740642&permissions=8&scope=bot">🤖 Invitar ModdyBot</a>
-
 </div>
-
 </section>
 
-
 <footer>
-
 © 2026 ModdyBot | NebulaBots Studio
-
 </footer>
 
-
 <script>
-
 /* partículas */
-
 const particles=200;
 const container=document.getElementById("particles");
-
 for(let i=0;i<particles;i++){
-
 let p=document.createElement("div");
 p.className="particle";
-
 p.style.left=Math.random()*100+"vw";
 p.style.top=Math.random()*100+"vh";
-
 p.style.animationDuration=(Math.random()*20+10)+"s";
-
 container.appendChild(p);
-
 }
+
+/* Scroll animado con efecto slide */
+const links = document.querySelectorAll('nav a, .cta-button[data-target]');
+links.forEach(link=>{
+link.addEventListener('click', e=>{
+e.preventDefault();
+const targetId = link.dataset.target;
+const target = document.getElementById(targetId);
+if(target){
+target.scrollIntoView({behavior:'smooth', block:'start'});
+target.classList.add('visible');
+window.history.pushState(null,null,'#'+targetId);
+}
+});
+});
+
+/* Aparecer secciones y comandos al hacer scroll */
+const sections = document.querySelectorAll('section');
+const commands = document.querySelectorAll('.command');
+function reveal(){
+sections.forEach(section=>{
+const top = section.getBoundingClientRect().top;
+if(top < window.innerHeight - 100){
+section.classList.add('visible');
+}
+});
+commands.forEach(command=>{
+const top = command.getBoundingClientRect().top;
+if(top < window.innerHeight - 50){
+command.classList.add('visible');
+}
+});
+}
+window.addEventListener('scroll', reveal);
+window.addEventListener('load', reveal);
 
 </script>
 
 </body>
+                                                                                                                                       </html>
 </html>
