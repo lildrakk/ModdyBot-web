@@ -4,200 +4,509 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ModdyBot - Control Total para tu Servidor</title>
+
 <style>
-/* Variables de color */
-:root {
-  --color-primario: #00ffff;
-  --color-secundario: #1e90ff;
-  --color-acento: #ff5ef7;
-  --color-texto: #eee;
-  --color-bg: #0a0a0a;
+
+/* Variables */
+:root{
+--color-primario:#00ffff;
+--color-secundario:#1e90ff;
+--color-acento:#ff5ef7;
+--color-texto:#eee;
+--color-bg:#0a0a0a;
 }
 
-/* Reset y general */
+/* Reset */
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:Consolas,Monaco,'Courier New',monospace;background:var(--color-bg);color:var(--color-texto);scroll-behavior:smooth;overflow-x:hidden;}
+
+body{
+font-family:Consolas,Monaco,'Courier New',monospace;
+background:var(--color-bg);
+color:var(--color-texto);
+scroll-behavior:smooth;
+overflow-x:hidden;
+}
+
 a{text-decoration:none;color:inherit;}
 
-/* Fondo partículas */
-#particles{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;pointer-events:none;}
-.particle{position:absolute;border-radius:50%;background:rgba(255,255,255,0.6);width:2px;height:2px;animation:float linear infinite;}
-@keyframes float{0%{transform:translateY(0);}100%{transform:translateY(-110vh);}}
+/* Partículas */
 
-/* Header Hero */
-header{text-align:center;padding:120px 20px 60px 20px;background:linear-gradient(180deg,#050505,#101010);position:relative;}
-header img{width:220px;margin-bottom:20px;border-radius:20px;box-shadow:0 0 40px var(--color-primario);animation:floatLogo 4s ease-in-out infinite alternate;}
-@keyframes floatLogo{0%{transform:translateY(0);}100%{transform:translateY(-20px);}}
-header h1{font-size:4em;font-weight:bold;background:linear-gradient(90deg,var(--color-primario),var(--color-acento));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 25px var(--color-primario);animation:glow 2s infinite alternate;}
-header p{font-size:1.5em;max-width:900px;margin:0 auto 30px auto;line-height:1.6;color:#ccc;}
-.cta-button{display:inline-block;margin:10px;padding:15px 40px;font-size:1.2em;color:#fff;background:linear-gradient(90deg,var(--color-primario),var(--color-acento));border-radius:25px;box-shadow:0 0 30px var(--color-primario);transition:0.6s;animation:pulse 2s infinite;}
-.cta-button:hover{background:linear-gradient(90deg,var(--color-acento),var(--color-primario));box-shadow:0 0 60px var(--color-primario);transform:scale(1.1);}
-@keyframes glow{0%{text-shadow:0 0 15px var(--color-primario);}100%{text-shadow:0 0 50px var(--color-acento);}}
-@keyframes pulse{0%{box-shadow:0 0 25px var(--color-primario);}50%{box-shadow:0 0 50px var(--color-acento);}100%{box-shadow:0 0 25px var(--color-primario);}}
+#particles{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:-1;
+pointer-events:none;
+}
 
-/* Nav fijo animado */
-nav{position:fixed;top:0;left:0;width:100%;background:rgba(10,10,10,0.85);padding:15px;display:flex;justify-content:center;gap:25px;z-index:999;border-bottom:1px solid var(--color-primario);}
-nav a{color:var(--color-primario);font-weight:bold;transition:0.5s;animation:glowNav 2s infinite alternate;}
-nav a:hover{color:#fff;text-shadow:0 0 20px var(--color-acento);transform:scale(1.1);}
-@keyframes glowNav{0%{text-shadow:0 0 5px var(--color-primario);}100%{text-shadow:0 0 25px var(--color-acento);}}
+.particle{
+position:absolute;
+border-radius:50%;
+background:rgba(255,255,255,0.6);
+width:2px;
+height:2px;
+animation:float linear infinite;
+}
 
-/* Secciones */
-section{padding:100px 20px;}
-section h2{font-size:3em;color:var(--color-primario);margin-bottom:20px;text-shadow:0 0 15px var(--color-acento);animation:neon 2s infinite alternate;text-align:center;}
-section p{max-width:900px;margin:0 auto;font-size:1.2em;line-height:1.7;color:#ccc;text-align:center;}
+@keyframes float{
+0%{transform:translateY(0);}
+100%{transform:translateY(-110vh);}
+}
 
-/* Comandos */
-.commands{display:flex;flex-wrap:wrap;justify-content:center;gap:30px;}
-.command{background:linear-gradient(145deg,#111,#1a1a1a);border-radius:20px;width:280px;padding:25px;text-align:center;box-shadow:0 0 40px rgba(0,170,255,0.7);transition:transform 0.7s,box-shadow 0.7s;animation:slideUp 0.8s;}
-.command:hover{transform:scale(1.08);box-shadow:0 0 70px rgba(255,94,247,0.85);}
-.command h3{color:var(--color-primario);margin-bottom:12px;text-shadow:0 0 12px var(--color-acento);}
-.command p{color:#ccc;margin:8px 0;}
-.command button{display:inline-block;margin-top:12px;padding:10px 22px;border-radius:15px;background:linear-gradient(90deg,var(--color-primario),var(--color-acento));color:#fff;font-weight:bold;box-shadow:0 0 25px var(--color-primario);transition:0.5s;cursor:pointer;animation:pulse 2s infinite;}
-.command button:hover{background:linear-gradient(90deg,var(--color-acento),var(--color-primario));box-shadow:0 0 60px var(--color-primario);transform:scale(1.08);}
-@keyframes slideUp{0%{transform:translateY(30px);opacity:0;}100%{transform:translateY(0);opacity:1;}}
+/* NAV */
 
-/* Modal */
-.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);justify-content:center;align-items:center;z-index:1000;}
-.modal-content{background:linear-gradient(145deg,#111,#1a1a1a);border-radius:25px;padding:30px;width:90%;max-width:650px;position:relative;box-shadow:0 0 70px rgba(0,170,255,0.85);transform:scale(0);opacity:0;transition:all 0.6s ease;}
-.modal-content.show{transform:scale(1);opacity:1;}
-.modal-content h3{color:var(--color-primario);margin-bottom:15px;text-shadow:0 0 15px var(--color-acento);}
-.modal-content p{color:#ccc;line-height:1.6;margin-bottom:15px;}
-.modal-content .close{position:absolute;top:15px;right:15px;font-size:1.7em;color:#fff;cursor:pointer;transition:0.3s;}
-.modal-content .close:hover{color:var(--color-primario);transform:scale(1.2);}
-.modal-content .discord-link{display:inline-block;padding:12px 25px;border-radius:20px;background:linear-gradient(90deg,var(--color-primario),var(--color-acento));color:#fff;box-shadow:0 0 30px var(--color-primario);transition:0.5s;animation:pulse 2s infinite;}
-.modal-content .discord-link:hover{background:linear-gradient(90deg,var(--color-acento),var(--color-primario));box-shadow:0 0 60px var(--color-primario);transform:scale(1.05);}
+nav{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+background:rgba(10,10,10,0.9);
+padding:15px;
+display:flex;
+justify-content:center;
+gap:30px;
+z-index:999;
+border-bottom:1px solid var(--color-primario);
+}
 
-/* Footer */
-footer{text-align:center;padding:50px 20px;background:var(--color-bg);color:#777;font-size:0.95em;}
+nav a{
+color:var(--color-primario);
+font-weight:bold;
+font-size:1.1em;
+transition:0.4s;
+opacity:0;
+transform:translateY(-20px);
+animation:navSlide 1.5s forwards;
+}
 
-/* Responsive */
-@media(max-width:768px){header h1{font-size:2.8em;} .commands{flex-direction:column;align-items:center;} .command{width:90%;}}
+nav a:nth-child(1){animation-delay:0.3s;}
+nav a:nth-child(2){animation-delay:0.6s;}
+nav a:nth-child(3){animation-delay:0.9s;}
+nav a:nth-child(4){animation-delay:1.2s;}
+
+nav a:hover{
+color:#fff;
+text-shadow:0 0 20px var(--color-acento);
+transform:scale(1.1);
+}
+
+@keyframes navSlide{
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+/* HEADER */
+
+header{
+text-align:center;
+padding:120px 20px 60px;
+background:linear-gradient(180deg,#050505,#101010);
+}
+
+header img{
+width:220px;
+margin-bottom:20px;
+border-radius:20px;
+box-shadow:0 0 40px var(--color-primario);
+animation:floatLogo 4s ease-in-out infinite alternate;
+}
+
+@keyframes floatLogo{
+0%{transform:translateY(0);}
+100%{transform:translateY(-20px);}
+}
+
+header h1{
+font-size:4em;
+background:linear-gradient(90deg,var(--color-primario),var(--color-acento));
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+text-shadow:0 0 25px var(--color-primario);
+}
+
+header p{
+font-size:1.5em;
+max-width:900px;
+margin:auto;
+color:#ccc;
+margin-bottom:30px;
+}
+
+.cta-button{
+display:inline-block;
+margin:10px;
+padding:15px 40px;
+font-size:1.2em;
+color:#fff;
+background:linear-gradient(90deg,var(--color-primario),var(--color-acento));
+border-radius:25px;
+box-shadow:0 0 30px var(--color-primario);
+transition:0.6s;
+}
+
+.cta-button:hover{
+transform:scale(1.1);
+box-shadow:0 0 60px var(--color-acento);
+}
+
+/* SECCIONES */
+
+section{
+padding:100px 20px;
+}
+
+section h2{
+font-size:3em;
+color:var(--color-primario);
+margin-bottom:20px;
+text-align:center;
+text-shadow:0 0 20px var(--color-acento);
+}
+
+section p{
+max-width:900px;
+margin:auto;
+font-size:1.2em;
+line-height:1.7;
+color:#ccc;
+text-align:center;
+}
+
+/* COMANDOS */
+
+.commands{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:30px;
+margin-top:30px;
+}
+
+.command{
+background:linear-gradient(145deg,#111,#1a1a1a);
+border-radius:20px;
+width:280px;
+padding:25px;
+text-align:center;
+box-shadow:0 0 40px rgba(0,170,255,0.7);
+transition:0.5s;
+}
+
+.command:hover{
+transform:scale(1.08);
+box-shadow:0 0 70px rgba(255,94,247,0.85);
+}
+
+.command h3{
+color:var(--color-primario);
+margin-bottom:10px;
+}
+
+.command button{
+margin-top:12px;
+padding:10px 22px;
+border-radius:15px;
+background:linear-gradient(90deg,var(--color-primario),var(--color-acento));
+color:#fff;
+border:none;
+cursor:pointer;
+}
+
+/* INFO BOT */
+
+#info{
+background:linear-gradient(180deg,#0b0b0b,#111);
+}
+
+.info-box{
+max-width:900px;
+margin:auto;
+background:linear-gradient(145deg,#111,#1a1a1a);
+padding:40px;
+border-radius:20px;
+box-shadow:0 0 50px rgba(0,255,255,0.3);
+}
+
+/* SOPORTE */
+
+.discord-links{
+display:flex;
+justify-content:center;
+gap:30px;
+margin-top:30px;
+}
+
+.discord-links a{
+padding:15px 30px;
+border-radius:25px;
+background:linear-gradient(90deg,var(--color-primario),var(--color-acento));
+box-shadow:0 0 25px var(--color-primario);
+}
+
+/* FOOTER */
+
+footer{
+text-align:center;
+padding:40px;
+color:#777;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+.commands{
+flex-direction:column;
+align-items:center;
+}
+
+.command{
+width:90%;
+}
+
+}
+
 </style>
 </head>
+
 <body>
 
 <div id="particles"></div>
 
 <nav>
+
 <a href="#inicio">Inicio</a>
+
 <a href="#comandos1">Comandos del Bot</a>
+
+<a href="#info">¿Quiénes Somos?</a>
+
 <a href="#soporte">Soporte</a>
+
 </nav>
 
 <header id="inicio">
-<img src="1logo.png" alt="Logo ModdyBot">
+
+<img src="1logo.png">
+
 <h1>ModdyBot</h1>
-<p>Protege tu servidor y gestiona todo con facilidad. Anti-Raid, Anti-Spam, Anti-Links, Backups, Reaction Roles y más.</p>
-<a href="https://discord.com/oauth2/authorize?client_id=1450924184606740642&permissions=8&integration_type=0&scope=bot" target="_blank" class="cta-button">🤖 Invitar Bot</a>
+
+<p>
+Protege tu servidor y gestiona todo con facilidad.
+Anti-Raid, Anti-Spam, Anti-Links, Backups, Reaction Roles y más.
+</p>
+
+<a href="https://discord.com/oauth2/authorize?client_id=1450924184606740642&permissions=8&scope=bot" class="cta-button">🤖 Invitar Bot</a>
+
 <a href="#comandos1" class="cta-button">Ver Comandos</a>
+
 </header>
 
-<!-- Sección Comandos 1 -->
+
 <section id="comandos1">
+
 <h2>Comandos de Seguridad</h2>
+
 <div class="commands">
-<div class="command"><h3>/verificacion_crear</h3><p>Crea un sistema de verificación con captcha anti-raid.</p><button class="open-modal" data-command="verificacion">Más info</button></div>
-<div class="command"><h3>/backup_crear / /backup_restaurar</h3><p>Genera y restaura backups del servidor.</p><button class="open-modal" data-command="backup">Más info</button></div>
+
+<div class="command">
+
+<h3>/verificacion_crear</h3>
+
+<p>Crea verificación con captcha anti-raid.</p>
+
+<button>Más info</button>
+
 </div>
+
+<div class="command">
+
+<h3>/backup_crear / /backup_restaurar</h3>
+
+<p>Genera y restaura backups del servidor.</p>
+
+<button>Más info</button>
+
+</div>
+
+</div>
+
 </section>
 
-<!-- Sección Comandos 2 -->
+
 <section id="comandos2">
+
 <h2>Protección y Moderación</h2>
+
 <div class="commands">
-<div class="command"><h3>/antispam</h3><p>Protege el servidor de mensajes repetidos o spam masivo.</p><button class="open-modal" data-command="antispam">Más info</button></div>
-<div class="command"><h3>/antiraid</h3><p>Activa protección automática contra raids.</p><button class="open-modal" data-command="antiraid">Más info</button></div>
-<div class="command"><h3>/antilinks</h3><p>Bloquea enlaces no deseados automáticamente.</p><button class="open-modal" data-command="antilinks">Más info</button></div>
+
+<div class="command">
+
+<h3>/antispam</h3>
+
+<p>Protege contra spam.</p>
+
+<button>Más info</button>
+
 </div>
+
+<div class="command">
+
+<h3>/antiraid</h3>
+
+<p>Protección automática contra raids.</p>
+
+<button>Más info</button>
+
+</div>
+
+<div class="command">
+
+<h3>/antilinks</h3>
+
+<p>Bloquea enlaces no deseados.</p>
+
+<button>Más info</button>
+
+</div>
+
+</div>
+
 </section>
 
-<!-- Sección Comandos 3 -->
+
 <section id="comandos3">
+
 <h2>Gestión Avanzada</h2>
+
 <div class="commands">
-<div class="command"><h3>/blacklist / /unblacklist / /blacklistlist</h3><p>Gestiona usuarios prohibidos de forma segura.</p><button class="open-modal" data-command="blacklist">Más info</button></div>
-<div class="command"><h3>/rr_add / /rr_remove / /rr_list</h3><p>Gestiona reaction roles personalizadas fácilmente.</p><button class="open-modal" data-command="rr">Más info</button></div>
+
+<div class="command">
+
+<h3>/blacklist</h3>
+
+<p>Gestiona usuarios bloqueados.</p>
+
+<button>Más info</button>
+
 </div>
+
+<div class="command">
+
+<h3>/rr_add / /rr_remove</h3>
+
+<p>Gestiona reaction roles.</p>
+
+<button>Más info</button>
+
+</div>
+
+</div>
+
 </section>
 
-<!-- Sección Soporte -->
+
+<section id="info">
+
+<h2>¿Quiénes Somos?</h2>
+
+<div class="info-box">
+
+<p>
+
+<b>NebulaBots Studio</b> es un equipo dedicado al desarrollo de bots de Discord y herramientas para comunidades online.
+
+Nuestro objetivo es ofrecer sistemas avanzados de automatización, seguridad y gestión para servidores.
+
+</p>
+
+<br>
+
+<p>
+
+<b>ModdyBot</b> es uno de nuestros proyectos principales.
+
+Este bot está diseñado para ofrecer protección completa a servidores de Discord mediante sistemas como:
+
+</p>
+
+<br>
+
+<p>
+
+🔹 Anti-Raid automático  
+🔹 Sistema Anti-Spam inteligente  
+🔹 Bloqueo de enlaces  
+🔹 Backups completos del servidor  
+🔹 Reaction Roles personalizadas  
+🔹 Sistema de verificación con captcha  
+
+</p>
+
+<br>
+
+<p>
+
+Nuestro objetivo es ofrecer una herramienta potente pero fácil de usar para administradores de servidores.
+
+Seguimos desarrollando nuevas funciones constantemente para mejorar la seguridad y gestión de comunidades.
+
+</p>
+
+</div>
+
+</section>
+
+
 <section id="soporte">
+
 <h2>Soporte e Invitación</h2>
-<p>Únete al servidor de soporte o invita al bot a tu servidor.</p>
-<div class="commands discord-links">
-<a href="https://discord.gg/qrMnzGztm3" target="_blank">💬 Servidor de soporte</a>
-<a href="https://discord.com/oauth2/authorize?client_id=1450924184606740642&permissions=8&integration_type=0&scope=bot" target="_blank">🤖 Invitar ModdyBot</a>
+
+<p>Únete a nuestro servidor de soporte o invita el bot.</p>
+
+<div class="discord-links">
+
+<a href="https://discord.gg/qrMnzGztm3">💬 Servidor de soporte</a>
+
+<a href="https://discord.com/oauth2/authorize?client_id=1450924184606740642&permissions=8&scope=bot">🤖 Invitar ModdyBot</a>
+
 </div>
+
 </section>
 
-<!-- Modal -->
-<div class="modal" id="modal">
-<div class="modal-content" id="modal-content">
-<span class="close">&times;</span>
-<h3 id="modal-title">Comando Detalles</h3>
-<p id="modal-desc">Aquí va la descripción extendida del comando.</p>
-<a href="https://discord.gg/qrMnzGztm3" id="modal-link" class="discord-link" target="_blank">Ir al servidor de soporte</a>
-</div>
-</div>
 
 <footer>
-© 2026 ModdyBot | Al usar la web aceptas nuestros términos y condiciones
+
+© 2026 ModdyBot | NebulaBots Studio
+
 </footer>
 
-<script>
-// Scroll suave para botones CTA
-document.querySelectorAll('.cta-button').forEach(btn=>{
-  btn.addEventListener('click',e=>{
-    e.preventDefault();
-    const target = btn.getAttribute('href');
-    if(target.startsWith("#")){
-      document.querySelector(target).scrollIntoView({behavior:'smooth'});
-    } else {
-      window.open(target,'_blank');
-    }
-  });
-});
 
-// Partículas de fondo
-const particlesCount=200;
-const particlesContainer=document.getElementById('particles');
-for(let i=0;i<particlesCount;i++){
-  const p=document.createElement('div');
-  p.classList.add('particle');
-  p.style.left=Math.random()*100+'vw';
-  p.style.top=Math.random()*100+'vh';
-  p.style.width=(Math.random()*3+1)+'px';
-  p.style.height=(Math.random()*3+1)+'px';
-  p.style.animationDuration=(Math.random()*20+10)+'s';
-  particlesContainer.appendChild(p);
+<script>
+
+/* partículas */
+
+const particles=200;
+const container=document.getElementById("particles");
+
+for(let i=0;i<particles;i++){
+
+let p=document.createElement("div");
+p.className="particle";
+
+p.style.left=Math.random()*100+"vw";
+p.style.top=Math.random()*100+"vh";
+
+p.style.animationDuration=(Math.random()*20+10)+"s";
+
+container.appendChild(p);
+
 }
 
-// Modal
-const modal=document.getElementById('modal');
-const modalContent=document.getElementById('modal-content');
-const modalTitle=document.getElementById('modal-title');
-const modalDesc=document.getElementById('modal-desc');
-const modalLink=document.getElementById('modal-link');
-
-document.querySelectorAll('.open-modal').forEach(btn=>{
-  btn.addEventListener('click',e=>{
-    e.preventDefault();
-    const cmd=btn.dataset.command;
-    switch(cmd){
-      case'verificacion': modalTitle.textContent='/verificacion_crear'; modalDesc.textContent='Crea un sistema de verificación con captcha anti-raid. Fácil de usar y completamente seguro.'; break;
-      case'backup': modalTitle.textContent='/backup_crear / /backup_restaurar'; modalDesc.textContent='Crea backups completas de tu servidor y restaura cuando lo necesites.'; break;
-      case'antispam': modalTitle.textContent='/antispam'; modalDesc.textContent='Protege tu servidor de spam masivo automáticamente.'; break;
-      case'antiraid': modalTitle.textContent='/antiraid'; modalDesc.textContent='Activa protección anti-raid y detecta intrusos de forma automática.'; break;
-      case'antilinks': modalTitle.textContent='/antilinks'; modalDesc.textContent='Bloquea enlaces no deseados automáticamente para mantener el servidor seguro.'; break;
-      case'blacklist': modalTitle.textContent='/blacklist / /unblacklist / /blacklistlist'; modalDesc.textContent='Gestiona usuarios prohibidos por servidor de forma segura y eficiente.'; break;
-      case'rr': modalTitle.textContent='/rr_add / /rr_remove / /rr_list'; modalDesc.textContent='Gestiona reaction roles para roles personalizados de manera rápida.'; break;
-    }
-    modal.classList.add('show');
-  });
-});
-
-document.querySelector('.close').addEventListener('click',()=>{modal.classList.remove('show');});
-window.addEventListener('click',e=>{if(e.target==modal) modal.classList.remove('show');});
 </script>
 
 </body>
