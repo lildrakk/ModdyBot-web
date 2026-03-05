@@ -292,6 +292,89 @@ width:90%;
 }
 }
 
+/* MODAL INFO */
+@keyframes glowAnim {
+0% { box-shadow: 0 0 20px var(--color-acento), 0 0 40px var(--color-primario); }
+50% { box-shadow: 0 0 40px var(--color-acento), 0 0 60px var(--color-primario); }
+100% { box-shadow: 0 0 20px var(--color-acento), 0 0 40px var(--color-primario); }
+}
+
+.modal{
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%) scale(0);
+background:linear-gradient(145deg,#111,#1a1a1a);
+padding:25px;
+border-radius:20px;
+max-width:600px;
+width:90%;
+color:#ccc;
+z-index:1000;
+transition:0.3s ease;
+opacity:0;
+pointer-events:none;
+animation:glowAnim 2.5s infinite alternate;
+}
+
+.modal.active{
+transform:translate(-50%,-50%) scale(1);
+opacity:1;
+pointer-events:auto;
+}
+
+.modal .close{
+position:absolute;
+top:15px;
+right:15px;
+font-size:1.5em;
+cursor:pointer;
+color:var(--color-acento);
+transition:0.3s;
+}
+
+.modal .close:hover{
+color:var(--color-primario);
+}
+
+.modal h3, .modal p{
+opacity:0;
+transform:translateY(20px);
+transition:0.4s ease;
+}
+
+.modal.active h3, .modal.active p{
+opacity:1;
+transform:translateY(0);
+}
+
+.modal h3{
+color:var(--color-primario);
+margin-bottom:15px;
+}
+
+.modal p{
+line-height:1.6;
+font-size:1.1em;
+}
+
+.modal-overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.6);
+z-index:999;
+opacity:0;
+pointer-events:none;
+transition:0.3s ease;
+}
+
+.modal-overlay.active{
+opacity:1;
+pointer-events:auto;
+}
 </style>
 </head>
 
@@ -323,12 +406,12 @@ Anti-Raid, Anti-Spam, Anti-Links, Backups, Reaction Roles y más.
 <div class="command">
 <h3>/verificacion_crear</h3>
 <p>Crea verificación con captcha anti-raid.</p>
-<button>Más info</button>
+<button data-info="Este comando genera un sistema de verificación para nuevos usuarios mediante captcha, evitando que bots o atacantes entren automáticamente al servidor.">Más info</button>
 </div>
 <div class="command">
 <h3>/backup_crear / /backup_restaurar</h3>
 <p>Genera y restaura backups del servidor.</p>
-<button>Más info</button>
+<button data-info="Permite crear un backup completo del servidor incluyendo canales, roles y configuraciones. También permite restaurarlo en cualquier momento para recuperar la información.">Más info</button>
 </div>
 </div>
 </section>
@@ -339,17 +422,17 @@ Anti-Raid, Anti-Spam, Anti-Links, Backups, Reaction Roles y más.
 <div class="command">
 <h3>/antispam</h3>
 <p>Protege contra spam.</p>
-<button>Más info</button>
+<button data-info="Detecta mensajes repetidos o masivos y aplica sanciones automáticas para mantener el chat limpio.">Más info</button>
 </div>
 <div class="command">
 <h3>/antiraid</h3>
 <p>Protección automática contra raids.</p>
-<button>Más info</button>
+<button data-info="Monitorea la entrada masiva de usuarios sospechosos y aplica medidas preventivas automáticas para proteger tu servidor de raids.">Más info</button>
 </div>
 <div class="command">
 <h3>/antilinks</h3>
 <p>Bloquea enlaces no deseados.</p>
-<button>Más info</button>
+<button data-info="Bloquea mensajes que contienen enlaces externos no permitidos, previniendo spam y phishing dentro del servidor.">Más info</button>
 </div>
 </div>
 </section>
@@ -360,12 +443,12 @@ Anti-Raid, Anti-Spam, Anti-Links, Backups, Reaction Roles y más.
 <div class="command">
 <h3>/blacklist</h3>
 <p>Gestiona usuarios bloqueados.</p>
-<button>Más info</button>
+<button data-info="Agrega o quita usuarios de la blacklist para que no puedan interactuar en el servidor.">Más info</button>
 </div>
 <div class="command">
 <h3>/rr_add / /rr_remove</h3>
 <p>Gestiona reaction roles.</p>
-<button>Más info</button>
+<button data-info="Permite añadir o remover roles a los usuarios mediante reacciones en mensajes específicos.">Más info</button>
 </div>
 </div>
 </section>
@@ -408,6 +491,14 @@ Seguimos desarrollando nuevas funciones constantemente para mejorar la seguridad
 <footer>
 © 2026 ModdyBot | NebulaBots Studio
 </footer>
+
+<!-- MODAL INFO -->
+<div class="modal-overlay"></div>
+<div class="modal">
+<span class="close">&times;</span>
+<h3>Comando</h3>
+<p>Descripción completa del comando</p>
+</div>
 
 <script>
 /* partículas */
@@ -457,8 +548,47 @@ command.classList.add('visible');
 window.addEventListener('scroll', reveal);
 window.addEventListener('load', reveal);
 
+/* MODAL INFO */
+const modal = document.querySelector('.modal');
+const overlay = document.querySelector('.modal-overlay');
+const closeModal = document.querySelector('.modal .close');
+const infoButtons = document.querySelectorAll('.command button');
+
+infoButtons.forEach(btn=>{
+btn.addEventListener('click', ()=>{
+// Cambiar contenido
+modal.querySelector('h3').textContent = btn.parentElement.querySelector('h3').textContent;
+modal.querySelector('p').textContent = btn.dataset.info;
+
+// Forzar reinicio de animación
+modal.querySelector('h3').style.opacity = 0;
+modal.querySelector('h3').style.transform = 'translateY(20px)';
+modal.querySelector('p').style.opacity = 0;
+modal.querySelector('p').style.transform = 'translateY(20px)';
+
+// Activar modal
+modal.classList.add('active');
+overlay.classList.add('active');
+
+// Animación suave de texto
+setTimeout(()=>{
+modal.querySelector('h3').style.opacity = 1;
+modal.querySelector('h3').style.transform = 'translateY(0)';
+modal.querySelector('p').style.opacity = 1;
+modal.querySelector('p').style.transform = 'translateY(0)';
+},50);
+});
+
+closeModal.addEventListener('click', ()=>{
+modal.classList.remove('active');
+overlay.classList.remove('active');
+});
+
+overlay.addEventListener('click', ()=>{
+modal.classList.remove('active');
+overlay.classList.remove('active');
+});
 </script>
 
 </body>
-                                                                                                                                       </html>
-</html>
+  </html>
