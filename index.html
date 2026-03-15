@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="es">
+<!DOCTYPE html><html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ModdyBot - Control Total para tu Servidor</title>
-<style>
+<title>ModdyBot - Control Total para tu Servidor</title><style>
+
 :root{
   --color-primario:#00ffff;
   --color-secundario:#1e90ff;
@@ -12,7 +11,9 @@
   --color-texto:#eee;
   --color-bg:#0a0a0a;
 }
+
 *{margin:0;padding:0;box-sizing:border-box;}
+
 body{
   font-family:Consolas,Monaco,'Courier New',monospace;
   background:var(--color-bg);
@@ -20,350 +21,499 @@ body{
   scroll-behavior:smooth;
   overflow-x:hidden;
 }
+
 a{text-decoration:none;color:inherit;}
 
-/* Partículas */
-#particles{
-  position:fixed; top:0; left:0;
-  width:100%; height:100%;
-  z-index:-1; pointer-events:none;
-}
-.particle{
-  position:absolute; border-radius:50%;
-  background:rgba(255,255,255,0.6);
-  width:2px; height:2px;
-  animation:float linear infinite;
-}
-@keyframes float{
-  0%{transform:translateY(0);}
-  100%{transform:translateY(-110vh);}
+
+/* LOGO FIJO */
+
+.logo-fixed{
+position:fixed;
+top:10px;
+left:20px;
+z-index:1000;
+cursor:pointer;
 }
 
+.logo-fixed img{
+width:55px;
+border-radius:10px;
+box-shadow:0 0 25px var(--color-primario);
+transition:0.3s;
+}
+
+.logo-fixed img:hover{
+transform:scale(1.1);
+box-shadow:0 0 40px var(--color-acento);
+}
+
+
+/* Partículas */
+
+#particles{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:-1;
+pointer-events:none;
+}
+
+.particle{
+position:absolute;
+border-radius:50%;
+background:rgba(255,255,255,0.6);
+width:2px;
+height:2px;
+animation:float linear infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(0);}
+100%{transform:translateY(-110vh);}
+}
+
+
 /* NAV */
+
 nav{
-  position:fixed; top:0; left:0;
-  width:100%; background:rgba(10,10,10,0.9);
-  padding:15px; display:flex; justify-content:center; gap:30px;
-  z-index:999; border-bottom:1px solid var(--color-primario);
+position:fixed;
+top:0;
+left:0;
+width:100%;
+background:rgba(10,10,10,0.9);
+padding:15px;
+display:flex;
+justify-content:center;
+gap:30px;
+z-index:999;
+border-bottom:1px solid var(--color-primario);
 }
+
 nav a{
-  color:var(--color-primario); font-weight:bold;
-  font-size:1.1em; transition:0.4s;
-  opacity:0; transform:translateY(-20px);
-  animation:navSlide 1.5s forwards; cursor:pointer;
+color:var(--color-primario);
+font-weight:bold;
+font-size:1.1em;
+transition:0.4s;
+opacity:0;
+transform:translateY(-20px);
+animation:navSlide 1.5s forwards;
+cursor:pointer;
 }
+
 nav a:nth-child(1){animation-delay:0.3s;}
 nav a:nth-child(2){animation-delay:0.6s;}
 nav a:nth-child(3){animation-delay:0.9s;}
 nav a:nth-child(4){animation-delay:1.2s;}
+
 nav a:hover{
-  color:#fff; text-shadow:0 0 20px var(--color-acento);
-  transform:scale(1.1);
+color:#fff;
+text-shadow:0 0 20px var(--color-acento);
+transform:scale(1.1);
 }
-@keyframes navSlide{ to{opacity:1; transform:translateY(0);}}
+
+@keyframes navSlide{
+to{opacity:1; transform:translateY(0);}
+}
+
 
 /* HEADER */
+
 header{
-  text-align:center; padding:120px 20px 60px;
-  background:linear-gradient(180deg,#050505,#101010);
+text-align:center;
+padding:120px 20px 60px;
+background:linear-gradient(180deg,#050505,#101010);
 }
+
 header img{
-  width:220px; margin-bottom:20px; border-radius:20px;
-  box-shadow:0 0 40px var(--color-primario);
-  animation:floatLogo 4s ease-in-out infinite alternate;
+width:220px;
+margin-bottom:20px;
+border-radius:20px;
+box-shadow:0 0 40px var(--color-primario);
+animation:floatLogo 4s ease-in-out infinite alternate;
 }
-@keyframes floatLogo{0%{transform:translateY(0);}100%{transform:translateY(-20px);}}
+
+@keyframes floatLogo{
+0%{transform:translateY(0);}
+100%{transform:translateY(-20px);}
+}
+
 header h1{
-  font-size:4em;
-  background:linear-gradient(90deg,var(--color-primario),var(--color-acento));
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-  text-shadow:0 0 25px var(--color-primario);
+font-size:4em;
+background:linear-gradient(90deg,var(--color-primario),var(--color-acento));
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+text-shadow:0 0 25px var(--color-primario);
 }
+
 header p{
-  font-size:1.5em; max-width:900px; margin:auto; color:#ccc; margin-bottom:30px;
+font-size:1.5em;
+max-width:900px;
+margin:auto;
+color:#ccc;
+margin-bottom:30px;
 }
+
 .cta-button{
-  display:inline-block; margin:10px; padding:15px 40px; font-size:1.2em;
-  color:#fff; background:linear-gradient(90deg,var(--color-primario),var(--color-acento));
-  border-radius:25px; box-shadow:0 0 30px var(--color-primario);
-  transition:0.6s; cursor:pointer;
+display:inline-block;
+margin:10px;
+padding:15px 40px;
+font-size:1.2em;
+color:#fff;
+background:linear-gradient(90deg,var(--color-primario),var(--color-acento));
+border-radius:25px;
+box-shadow:0 0 30px var(--color-primario);
+transition:0.6s;
+cursor:pointer;
 }
+
 .cta-button:hover{
-  transform:scale(1.1); box-shadow:0 0 60px var(--color-acento);
+transform:scale(1.1);
+box-shadow:0 0 60px var(--color-acento);
 }
+
 
 /* SECCIONES */
+
 section{
-  padding:100px 20px; opacity:0; transform:translateY(30px);
-  transition:1s ease;
+padding:100px 20px;
+opacity:0;
+transform:translateY(30px);
+transition:1s ease;
 }
-section.visible{opacity:1; transform:translateY(0);}
+
+section.visible{
+opacity:1;
+transform:translateY(0);
+}
+
 section h2{
-  font-size:3em; color:var(--color-primario);
-  margin-bottom:20px; text-align:center;
-  text-shadow:0 0 20px var(--color-acento);
+font-size:3em;
+color:var(--color-primario);
+margin-bottom:20px;
+text-align:center;
+text-shadow:0 0 20px var(--color-acento);
 }
+
 section p{
-  max-width:900px; margin:auto; font-size:1.2em; line-height:1.7;
-  color:#ccc; text-align:center;
+max-width:900px;
+margin:auto;
+font-size:1.2em;
+line-height:1.7;
+color:#ccc;
+text-align:center;
 }
+
+
+/* ESTADISTICAS */
+
+.stats{
+display:flex;
+justify-content:center;
+gap:40px;
+flex-wrap:wrap;
+margin-top:40px;
+}
+
+.stat-box{
+background:linear-gradient(145deg,#111,#1a1a1a);
+padding:30px;
+border-radius:20px;
+width:220px;
+text-align:center;
+box-shadow:0 0 40px rgba(0,170,255,0.5);
+transition:0.4s;
+}
+
+.stat-box:hover{
+transform:scale(1.08);
+box-shadow:0 0 60px var(--color-acento);
+}
+
+.stat-number{
+font-size:2.5em;
+color:var(--color-primario);
+font-weight:bold;
+}
+
+.stat-text{
+margin-top:10px;
+color:#aaa;
+}
+
+
+/* COMO FUNCIONA */
+
+.steps{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:40px;
+margin-top:40px;
+}
+
+.step{
+background:#121212;
+padding:25px;
+border-radius:20px;
+width:260px;
+text-align:center;
+transition:0.4s;
+}
+
+.step:hover{
+transform:translateY(-10px);
+box-shadow:0 0 30px var(--color-acento);
+}
+
+.step span{
+font-size:2em;
+}
+
+
+/* VENTAJAS */
+
+.features-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
+margin-top:40px;
+max-width:1000px;
+margin-left:auto;
+margin-right:auto;
+}
+
+.feature-box{
+background:#121212;
+padding:25px;
+border-radius:20px;
+transition:0.4s;
+}
+
+.feature-box:hover{
+transform:scale(1.05);
+box-shadow:0 0 40px var(--color-primario);
+}
+
+
+/* FAQ */
+
+.faq{
+max-width:900px;
+margin:auto;
+margin-top:40px;
+}
+
+.faq-item{
+background:#121212;
+margin-bottom:15px;
+padding:20px;
+border-radius:15px;
+cursor:pointer;
+transition:0.3s;
+}
+
+.faq-item:hover{
+box-shadow:0 0 25px var(--color-acento);
+}
+
+.faq-answer{
+display:none;
+margin-top:10px;
+color:#bbb;
+}
+
 
 /* COMANDOS */
+
 .commands{
-  display:flex; flex-wrap:wrap; justify-content:center; gap:30px; margin-top:30px;
-}
-.command{
-  background:linear-gradient(145deg,#111,#1a1a1a);
-  border-radius:20px; width:280px; padding:25px; text-align:center;
-  box-shadow:0 0 40px rgba(0,170,255,0.7);
-  transition:0.5s, transform 0.6s; opacity:0; transform:translateY(20px);
-}
-.command.visible{opacity:1; transform:translateY(0);}
-.command:hover{transform:scale(1.08); box-shadow:0 0 70px rgba(255,94,247,0.85);}
-.command h3{color:var(--color-primario); margin-bottom:10px;}
-.command button{
-  margin-top:12px; padding:10px 22px; border-radius:15px;
-  background:linear-gradient(90deg,var(--color-primario),var(--color-acento));
-  color:#fff; border:none; cursor:pointer;
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:30px;
+margin-top:30px;
 }
 
-/* INFO BOT */
-#info{background:none;}
-.info-box{max-width:900px; margin:auto; padding:0; box-shadow:none;}
-.info-box ul{list-style:none; padding:0; margin-top:20px;}
-.info-box ul li{
-  margin:12px 0; font-size:1.2em; color:#ccc;
-  position:relative; padding-left:25px;
+.command{
+background:linear-gradient(145deg,#111,#1a1a1a);
+border-radius:20px;
+width:280px;
+padding:25px;
+text-align:center;
+box-shadow:0 0 40px rgba(0,170,255,0.7);
+transition:0.5s, transform 0.6s;
+opacity:0;
+transform:translateY(20px);
 }
-.info-box ul li::before{content:"🔹"; position:absolute; left:0;}
+
+.command.visible{
+opacity:1;
+transform:translateY(0);
+}
+
+.command:hover{
+transform:scale(1.08);
+box-shadow:0 0 70px rgba(255,94,247,0.85);
+}
+
+.command h3{
+color:var(--color-primario);
+margin-bottom:10px;
+}
+
+.command button{
+margin-top:12px;
+padding:10px 22px;
+border-radius:15px;
+background:linear-gradient(90deg,var(--color-primario),var(--color-acento));
+color:#fff;
+border:none;
+cursor:pointer;
+}
+
 
 /* SOPORTE */
+
 .discord-links{
-  display:flex; justify-content:center; gap:30px; margin-top:30px;
+display:flex;
+justify-content:center;
+gap:30px;
+margin-top:30px;
 }
+
 .discord-links a{
-  padding:15px 30px; border-radius:25px;
-  background:linear-gradient(90deg,var(--color-primario),var(--color-acento));
-  box-shadow:0 0 25px var(--color-primario);
+padding:15px 30px;
+border-radius:25px;
+background:linear-gradient(90deg,var(--color-primario),var(--color-acento));
+box-shadow:0 0 25px var(--color-primario);
 }
+
 
 /* FOOTER */
-footer{ text-align:center; padding:40px; color:#777; }
 
-/* RESPONSIVE */
-@media(max-width:768px){
-  .commands{flex-direction:column; align-items:center;}
-  .command{width:90%;}
+footer{
+text-align:center;
+padding:40px;
+color:#777;
 }
 
-/* MODAL INFO */
-@keyframes glowAnim {
-  0% { box-shadow: 0 0 20px var(--color-acento), 0 0 40px var(--color-primario); }
-  50% { box-shadow: 0 0 40px var(--color-acento), 0 0 60px var(--color-primario); }
-  100% { box-shadow: 0 0 20px var(--color-acento), 0 0 40px var(--color-primario); }
-}
-.modal{
-  position:fixed; top:50%; left:50%;
-  transform:translate(-50%,-50%) scale(0);
-  background:linear-gradient(145deg,#111,#1a1a1a);
-  padding:25px; border-radius:20px;
-  max-width:600px; width:90%; color:#ccc;
-  z-index:1000; transition:0.3s ease; opacity:0; pointer-events:none;
-  animation:glowAnim 2.5s infinite alternate;
-}
-.modal.active{
-  transform:translate(-50%,-50%) scale(1);
-  opacity:1; pointer-events:auto;
-}
-.modal .close{
-  position:absolute; top:15px; right:15px;
-  font-size:1.5em; cursor:pointer; color:var(--color-acento);
-  transition:0.3s;
-}
-.modal .close:hover{color:var(--color-primario);}
-.modal h3, .modal p{
-  opacity:0; transform:translateY(20px); transition:0.4s ease;
-}
-.modal.active h3, .modal.active p{
-  opacity:1; transform:translateY(0);
-}
-.modal h3{color:var(--color-primario); margin-bottom:15px;}
-.modal p{line-height:1.6; font-size:1.1em;}
-.modal-overlay{
-  position:fixed; top:0; left:0; width:100%; height:100%;
-  background:rgba(0,0,0,0.6); z-index:999; opacity:0; pointer-events:none;
-  transition:0.3s ease;
-}
-.modal-overlay.active{opacity:1; pointer-events:auto;}
-</style>
-</head>
-<body>
+</style></head><body><div id="particles"></div><a class="logo-fixed" data-target="inicio">
+<img src="1logo.png">
+</a><nav>
+<a data-target="inicio">Inicio</a>
+<a data-target="comandos1">Comandos del Bot</a>
+<a data-target="info">¿Quiénes Somos?</a>
+<a data-target="soporte">Soporte</a>
+</nav><header id="inicio"><img src="1logo.png"><h1>ModdyBot</h1><p>
+Protege tu servidor y gestiona todo con facilidad.  
+Anti-Raid, Anti-Spam, Anti-Links, Backups, Reaction Roles y más.
+</p><a data-target="comandos1" class="cta-button">Ver Comandos</a>
 
-<div id="particles"></div>
-
-<nav>
-  <a data-target="inicio">Inicio</a>
-  <a data-target="comandos1">Comandos del Bot</a>
-  <a data-target="info">¿Quiénes Somos?</a>
-  <a data-target="soporte">Soporte</a>
-</nav>
-
-<header id="inicio">
-  <img src="1logo.png" alt="Logo ModdyBot">
-  <h1>ModdyBot</h1>
-  <p>Protege tu servidor y gestiona todo con facilidad. Anti-Raid, Anti-Spam, Anti-Links, Backups, Reaction Roles y más.</p>
-  <a data-target="comandos1" class="cta-button">Ver Comandos</a>
-  <a href="https://discord.com/oauth2/authorize?client_id=1450924184606740642&permissions=8&scope=bot" class="cta-button">🤖 Invitar Bot</a>
-</header>
-
-<section id="comandos1">
-  <h2>Comandos de Seguridad</h2>
-  <div class="commands">
-    <div class="command">
-      <h3>/verificacion_crear</h3>
-      <p>Crea verificación con captcha anti-raid.</p>
-      <button data-info="Este comando genera un sistema de verificación para nuevos usuarios mediante captcha, evitando que bots o atacantes entren automáticamente al servidor.">Más info</button>
-    </div>
-    <div class="command">
-      <h3>/backup_crear / /backup_restaurar</h3>
-      <p>Genera y restaura backups del servidor.</p>
-      <button data-info="Permite crear un backup completo del servidor incluyendo canales, roles y configuraciones. También permite restaurarlo en cualquier momento para recuperar la información.">Más info</button>
-    </div>
-  </div>
-</section>
-
-<section id="comandos2">
-  <h2>Protección y Moderación</h2>
-  <div class="commands">
-    <div class="command">
-      <h3>/antispam</h3>
-      <p>Protege contra spam.</p>
-      <button data-info="Detecta mensajes repetidos o masivos y aplica sanciones automáticas para mantener el chat limpio.">Más info</button>
-    </div>
-    <div class="command">
-      <h3>/antiraid</h3>
-      <p>Protección automática contra raids.</p>
-      <button data-info="Monitorea la entrada masiva de usuarios sospechosos y aplica medidas preventivas automáticas para proteger tu servidor de raids.">Más info</button>
-    </div>
-    <div class="command">
-      <h3>/antilinks</h3>
-      <p>Bloquea enlaces no deseados.</p>
-      <button data-info="Bloquea mensajes que contienen enlaces externos no permitidos, previniendo spam y phishing dentro del servidor.">Más info</button>
-    </div>
-  </div>
-</section>
-
-<section id="comandos3">
-  <h2>Gestión Avanzada</h2>
-  <div class="commands">
-    <div class="command">
-      <h3>/blacklist</h3>
-      <p>Gestiona usuarios bloqueados.</p>
-      <button data-info="Agrega o quita usuarios de la blacklist para que no puedan interactuar en el servidor.">Más info</button>
-    </div>
-    <div class="command">
-      <h3>/rr_add / /rr_remove</h3>
-      <p>Gestiona reaction roles.</p>
-      <button data-info="Permite añadir o remover roles a los usuarios mediante reacciones en mensajes específicos.">Más info</button>
-    </div>
-  </div>
-</section>
-
-<section id="info">
-  <h2>¿Quiénes Somos?</h2>
-  <div class="info-box">
-    <p><b>NebulaBots Studio</b> es un equipo dedicado al desarrollo de bots de Discord y herramientas para comunidades online. Nuestro objetivo es ofrecer sistemas avanzados de automatización, seguridad y gestión para servidores.</p>
-    <p><b>ModdyBot</b> es uno de nuestros proyectos principales. Este bot está diseñado para ofrecer protección completa a servidores de Discord mediante sistemas como:</p>
-    <ul>
-      <li>Anti-Raid automático</li>
-      <li>Sistema Anti-Spam inteligente</li>
-      <li>Bloqueo de enlaces</li>
-      <li>Backups completos del servidor</li>
-      <li>Reaction Roles personalizadas</li>
-      <li>Sistema de verificación con captcha</li>
-    </ul>
-    <p>Nuestro objetivo es ofrecer una herramienta potente pero fácil de usar para administradores de servidores. Seguimos desarrollando nuevas funciones constantemente para mejorar la seguridad y gestión de comunidades.</p>
-  </div>
-</section>
-
-<section id="soporte">
-  <h2>Soporte e Invitación</h2>
-  <p>Únete a nuestro servidor de soporte o invita el bot.</p>
-  <div class="discord-links">
-    <a href="https://discord.gg/qrMnzGztm3">💬 Servidor de soporte</a>
-    <a href="https://discord.com/oauth2/authorize?client_id=1450924184606740642&permissions=8&scope=bot">🤖 Invitar ModdyBot</a>
-  </div>
-</section>
-
-<footer>© 2026 ModdyBot | NebulaBots Studio</footer>
-
-<!-- MODAL INFO -->
-<div class="modal-overlay"></div>
-<div class="modal">
-  <span class="close">&times;</span>
-  <h3>Comando</h3>
-  <p>Descripción completa del comando</p>
+<a href="https://discord.com/oauth2/authorize?client_id=1450924184606740642&permissions=8&scope=bot" class="cta-button">
+🤖 Invitar Bot
+</a></header><section id="stats"><h2>Estadísticas de ModdyBot</h2><div class="stats"><div class="stat-box">
+<div class="stat-number">120+</div>
+<div class="stat-text">Servidores</div>
+</div><div class="stat-box">
+<div class="stat-number">25k+</div>
+<div class="stat-text">Usuarios protegidos</div>
+</div><div class="stat-box">
+<div class="stat-number">99.9%</div>
+<div class="stat-text">Tiempo activo</div>
+</div><div class="stat-box">
+<div class="stat-number">24/7</div>
+<div class="stat-text">Protección</div>
+</div></div></section><section id="funciona"><h2>¿Cómo funciona?</h2><div class="steps"><div class="step">
+<span>1️⃣</span>
+<h3>Invita el bot</h3>
+<p>Añade ModdyBot a tu servidor en segundos.</p>
+</div><div class="step">
+<span>2️⃣</span>
+<h3>Configura seguridad</h3>
+<p>Activa Anti-Raid, Anti-Spam y Anti-Links.</p>
+</div><div class="step">
+<span>3️⃣</span>
+<h3>Protección automática</h3>
+<p>El bot protege tu comunidad 24/7.</p>
+</div></div></section><section id="ventajas"><h2>¿Por qué usar ModdyBot?</h2><div class="features-grid"><div class="feature-box">
+<h3>🛡️ Seguridad Avanzada</h3>
+<p>Protección automática contra ataques y raids.</p>
+</div><div class="feature-box">
+<h3>⚡ Fácil de usar</h3>
+<p>Configuración rápida con comandos simples.</p>
+</div><div class="feature-box">
+<h3>🔧 Moderación</h3>
+<p>Herramientas completas para administrar tu servidor.</p>
+</div><div class="feature-box">
+<h3>🚀 Actualizaciones</h3>
+<p>Nuevas funciones añadidas constantemente.</p>
+</div></div></section><section id="faq"><h2>Preguntas Frecuentes</h2><div class="faq"><div class="faq-item">
+<h3>¿ModdyBot es gratis?</h3>
+<div class="faq-answer">
+Sí, el bot es completamente gratuito.
 </div>
+</div><div class="faq-item">
+<h3>¿Puede proteger mi servidor contra raids?</h3>
+<div class="faq-answer">
+Sí, ModdyBot tiene un sistema avanzado Anti-Raid.
+</div>
+</div><div class="faq-item">
+<h3>¿Tiene sistema de backups?</h3>
+<div class="faq-answer">
+Sí, puedes crear y restaurar backups del servidor.
+</div>
+</div></div></section><footer>
+© 2026 ModdyBot | NebulaBots Studio
+</footer><script>
 
-<script>
-/* Partículas */
-const particles=200;
-const container=document.getElementById("particles");
+const particles=200
+const container=document.getElementById("particles")
+
 for(let i=0;i<particles;i++){
-  let p=document.createElement("div");
-  p.className="particle";
-  p.style.left=Math.random()*100+"vw";
-  p.style.top=Math.random()*100+"vh";
-  p.style.animationDuration=(Math.random()*20+10)+"s";
-  container.appendChild(p);
+
+let p=document.createElement("div")
+
+p.className="particle"
+
+p.style.left=Math.random()*100+"vw"
+
+p.style.top=Math.random()*100+"vh"
+
+p.style.animationDuration=(Math.random()*20+10)+"s"
+
+container.appendChild(p)
+
 }
 
-/* Scroll animado y aparición de secciones */
-const links=document.querySelectorAll('nav a, .cta-button[data-target]');
+
+/* scroll */
+
+const links=document.querySelectorAll('[data-target]')
+
 links.forEach(link=>{
-  link.addEventListener('click',e=>{
-    e.preventDefault();
-    const targetId = link.dataset.target;
-    if(targetId){
-      const target=document.getElementById(targetId);
-      target.scrollIntoView({behavior:'smooth', block:'start'});
-      target.classList.add('visible');
-    }
-  });
-});
 
-const sections = document.querySelectorAll('section');
-const commands = document.querySelectorAll('.command');
-function reveal(){
-  sections.forEach(section=>{
-    if(section.getBoundingClientRect().top < window.innerHeight - 100){
-      section.classList.add('visible');
-    }
-  });
-  commands.forEach(command=>{
-    if(command.getBoundingClientRect().top < window.innerHeight - 50){
-      command.classList.add('visible');
-    }
-  });
-}
-window.addEventListener('scroll',reveal);
-window.addEventListener('load',reveal);
+link.addEventListener('click',e=>{
 
-/* Modal */
-const modal=document.querySelector('.modal');
-const overlay=document.querySelector('.modal-overlay');
-const closeModal=document.querySelector('.modal .close');
-document.querySelectorAll('.command button').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    modal.querySelector('h3').textContent=btn.parentElement.querySelector('h3').textContent;
-    modal.querySelector('p').textContent=btn.dataset.info;
-    modal.classList.add('active');
-    overlay.classList.add('active');
-  });
-});
-closeModal.addEventListener('click',()=>{modal.classList.remove('active'); overlay.classList.remove('active');});
-overlay.addEventListener('click',()=>{modal.classList.remove('active'); overlay.classList.remove('active');});
-</script>
+e.preventDefault()
 
-</body>
-                                                                                                                               </html>
+const target=document.getElementById(link.dataset.target)
+
+target.scrollIntoView({behavior:'smooth'})
+
+})
+
+})
+
+
+/* FAQ */
+
+document.querySelectorAll(".faq-item").forEach(item=>{
+item.addEventListener("click",()=>{
+let answer=item.querySelector(".faq-answer")
+answer.style.display=answer.style.display==="block"?"none":"block"
+})
+})
+
+</script></body>
+              </html> 
