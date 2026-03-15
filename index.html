@@ -1,54 +1,46 @@
-<!DOCTYPE html><html lang="es">
+<!DOCTYPE html>
+<html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ModdyBot - Control Total para tu Servidor</title><style>
+
+<title>ModdyBot - Control Total para tu Servidor</title>
+
+<style>
 
 :root{
-  --color-primario:#00ffff;
-  --color-secundario:#1e90ff;
-  --color-acento:#ff5ef7;
-  --color-texto:#eee;
-  --color-bg:#0a0a0a;
+--color-primario:#00ffff;
+--color-secundario:#1e90ff;
+--color-acento:#ff5ef7;
+--color-texto:#eee;
+--color-bg:#0a0a0a;
 }
 
 *{margin:0;padding:0;box-sizing:border-box;}
 
 body{
-  font-family:Consolas,Monaco,'Courier New',monospace;
-  background:var(--color-bg);
-  color:var(--color-texto);
-  scroll-behavior:smooth;
-  overflow-x:hidden;
+font-family:Consolas,Monaco,'Courier New',monospace;
+background:var(--color-bg);
+color:var(--color-texto);
+scroll-behavior:smooth;
+overflow-x:hidden;
 }
 
-a{text-decoration:none;color:inherit;}
+a{text-decoration:none;color:inherit}
 
+/* barra progreso */
 
-/* LOGO FIJO */
-
-.logo-fixed{
+#progress{
 position:fixed;
-top:10px;
-left:20px;
-z-index:1000;
-cursor:pointer;
+top:0;
+left:0;
+height:4px;
+background:linear-gradient(90deg,var(--color-primario),var(--color-acento));
+width:0%;
+z-index:2000;
 }
 
-.logo-fixed img{
-width:55px;
-border-radius:10px;
-box-shadow:0 0 25px var(--color-primario);
-transition:0.3s;
-}
-
-.logo-fixed img:hover{
-transform:scale(1.1);
-box-shadow:0 0 40px var(--color-acento);
-}
-
-
-/* Partículas */
+/* partículas */
 
 #particles{
 position:fixed;
@@ -70,10 +62,9 @@ animation:float linear infinite;
 }
 
 @keyframes float{
-0%{transform:translateY(0);}
-100%{transform:translateY(-110vh);}
+0%{transform:translateY(0)}
+100%{transform:translateY(-110vh)}
 }
-
 
 /* NAV */
 
@@ -87,7 +78,7 @@ padding:15px;
 display:flex;
 justify-content:center;
 gap:30px;
-z-index:999;
+z-index:1000;
 border-bottom:1px solid var(--color-primario);
 }
 
@@ -95,48 +86,33 @@ nav a{
 color:var(--color-primario);
 font-weight:bold;
 font-size:1.1em;
-transition:0.4s;
-opacity:0;
-transform:translateY(-20px);
-animation:navSlide 1.5s forwards;
+transition:.3s;
 cursor:pointer;
 }
-
-nav a:nth-child(1){animation-delay:0.3s;}
-nav a:nth-child(2){animation-delay:0.6s;}
-nav a:nth-child(3){animation-delay:0.9s;}
-nav a:nth-child(4){animation-delay:1.2s;}
 
 nav a:hover{
 color:#fff;
 text-shadow:0 0 20px var(--color-acento);
-transform:scale(1.1);
 }
-
-@keyframes navSlide{
-to{opacity:1; transform:translateY(0);}
-}
-
 
 /* HEADER */
 
 header{
 text-align:center;
-padding:120px 20px 60px;
+padding:150px 20px 80px;
 background:linear-gradient(180deg,#050505,#101010);
 }
 
 header img{
-width:220px;
-margin-bottom:20px;
+width:200px;
 border-radius:20px;
 box-shadow:0 0 40px var(--color-primario);
 animation:floatLogo 4s ease-in-out infinite alternate;
 }
 
 @keyframes floatLogo{
-0%{transform:translateY(0);}
-100%{transform:translateY(-20px);}
+0%{transform:translateY(0)}
+100%{transform:translateY(-20px)}
 }
 
 header h1{
@@ -144,12 +120,11 @@ font-size:4em;
 background:linear-gradient(90deg,var(--color-primario),var(--color-acento));
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
-text-shadow:0 0 25px var(--color-primario);
 }
 
 header p{
-font-size:1.5em;
-max-width:900px;
+font-size:1.4em;
+max-width:800px;
 margin:auto;
 color:#ccc;
 margin-bottom:30px;
@@ -164,7 +139,7 @@ color:#fff;
 background:linear-gradient(90deg,var(--color-primario),var(--color-acento));
 border-radius:25px;
 box-shadow:0 0 30px var(--color-primario);
-transition:0.6s;
+transition:.4s;
 cursor:pointer;
 }
 
@@ -173,14 +148,13 @@ transform:scale(1.1);
 box-shadow:0 0 60px var(--color-acento);
 }
 
-
 /* SECCIONES */
 
 section{
 padding:100px 20px;
 opacity:0;
-transform:translateY(30px);
-transition:1s ease;
+transform:translateY(40px);
+transition:1s;
 }
 
 section.visible{
@@ -190,23 +164,20 @@ transform:translateY(0);
 
 section h2{
 font-size:3em;
+text-align:center;
 color:var(--color-primario);
 margin-bottom:20px;
-text-align:center;
-text-shadow:0 0 20px var(--color-acento);
 }
 
 section p{
 max-width:900px;
 margin:auto;
-font-size:1.2em;
-line-height:1.7;
-color:#ccc;
 text-align:center;
+color:#ccc;
+font-size:1.2em;
 }
 
-
-/* ESTADISTICAS */
+/* stats */
 
 .stats{
 display:flex;
@@ -216,123 +187,33 @@ flex-wrap:wrap;
 margin-top:40px;
 }
 
-.stat-box{
-background:linear-gradient(145deg,#111,#1a1a1a);
+.stat{
+background:#111;
 padding:30px;
 border-radius:20px;
-width:220px;
+width:200px;
 text-align:center;
 box-shadow:0 0 40px rgba(0,170,255,0.5);
-transition:0.4s;
-}
-
-.stat-box:hover{
-transform:scale(1.08);
-box-shadow:0 0 60px var(--color-acento);
 }
 
 .stat-number{
-font-size:2.5em;
+font-size:2.4em;
 color:var(--color-primario);
 font-weight:bold;
 }
 
 .stat-text{
-margin-top:10px;
 color:#aaa;
 }
 
-
-/* COMO FUNCIONA */
-
-.steps{
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
-gap:40px;
-margin-top:40px;
-}
-
-.step{
-background:#121212;
-padding:25px;
-border-radius:20px;
-width:260px;
-text-align:center;
-transition:0.4s;
-}
-
-.step:hover{
-transform:translateY(-10px);
-box-shadow:0 0 30px var(--color-acento);
-}
-
-.step span{
-font-size:2em;
-}
-
-
-/* VENTAJAS */
-
-.features-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:30px;
-margin-top:40px;
-max-width:1000px;
-margin-left:auto;
-margin-right:auto;
-}
-
-.feature-box{
-background:#121212;
-padding:25px;
-border-radius:20px;
-transition:0.4s;
-}
-
-.feature-box:hover{
-transform:scale(1.05);
-box-shadow:0 0 40px var(--color-primario);
-}
-
-
-/* FAQ */
-
-.faq{
-max-width:900px;
-margin:auto;
-margin-top:40px;
-}
-
-.faq-item{
-background:#121212;
-margin-bottom:15px;
-padding:20px;
-border-radius:15px;
-cursor:pointer;
-transition:0.3s;
-}
-
-.faq-item:hover{
-box-shadow:0 0 25px var(--color-acento);
-}
-
-.faq-answer{
-display:none;
-margin-top:10px;
-color:#bbb;
-}
-
-
-/* COMANDOS */
+/* comandos */
 
 .commands{
 display:flex;
 flex-wrap:wrap;
 justify-content:center;
 gap:30px;
-margin-top:30px;
+margin-top:40px;
 }
 
 .command{
@@ -342,19 +223,12 @@ width:280px;
 padding:25px;
 text-align:center;
 box-shadow:0 0 40px rgba(0,170,255,0.7);
-transition:0.5s, transform 0.6s;
-opacity:0;
-transform:translateY(20px);
-}
-
-.command.visible{
-opacity:1;
-transform:translateY(0);
+transition:.4s;
 }
 
 .command:hover{
 transform:scale(1.08);
-box-shadow:0 0 70px rgba(255,94,247,0.85);
+box-shadow:0 0 70px rgba(255,94,247,0.8);
 }
 
 .command h3{
@@ -363,23 +237,75 @@ margin-bottom:10px;
 }
 
 .command button{
-margin-top:12px;
-padding:10px 22px;
+margin-top:10px;
+padding:10px 20px;
+border:none;
 border-radius:15px;
+cursor:pointer;
 background:linear-gradient(90deg,var(--color-primario),var(--color-acento));
 color:#fff;
-border:none;
-cursor:pointer;
 }
 
+/* modal */
 
-/* SOPORTE */
+.modal{
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%) scale(0);
+background:#111;
+padding:25px;
+border-radius:20px;
+width:90%;
+max-width:500px;
+transition:.3s;
+z-index:2000;
+}
+
+.modal.active{
+transform:translate(-50%,-50%) scale(1);
+}
+
+.modal h3{
+color:var(--color-primario);
+margin-bottom:10px;
+}
+
+.modal-close{
+position:absolute;
+top:10px;
+right:15px;
+cursor:pointer;
+color:var(--color-acento);
+font-size:20px;
+}
+
+.overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.6);
+opacity:0;
+pointer-events:none;
+transition:.3s;
+z-index:1500;
+}
+
+.overlay.active{
+opacity:1;
+pointer-events:auto;
+}
+
+/* soporte */
 
 .discord-links{
 display:flex;
 justify-content:center;
 gap:30px;
 margin-top:30px;
+flex-wrap:wrap;
 }
 
 .discord-links a{
@@ -389,131 +315,241 @@ background:linear-gradient(90deg,var(--color-primario),var(--color-acento));
 box-shadow:0 0 25px var(--color-primario);
 }
 
-
-/* FOOTER */
-
 footer{
 text-align:center;
 padding:40px;
 color:#777;
 }
 
-</style></head><body><div id="particles"></div><a class="logo-fixed" data-target="inicio">
-<img src="1logo.png">
-</a><nav>
+</style>
+</head>
+
+<body>
+
+<div id="progress"></div>
+<div id="particles"></div>
+
+<nav>
 <a data-target="inicio">Inicio</a>
-<a data-target="comandos1">Comandos del Bot</a>
-<a data-target="info">¿Quiénes Somos?</a>
+<a data-target="stats">Estadísticas</a>
+<a data-target="comandos">Comandos</a>
 <a data-target="soporte">Soporte</a>
-</nav><header id="inicio"><img src="1logo.png"><h1>ModdyBot</h1><p>
-Protege tu servidor y gestiona todo con facilidad.  
-Anti-Raid, Anti-Spam, Anti-Links, Backups, Reaction Roles y más.
-</p><a data-target="comandos1" class="cta-button">Ver Comandos</a>
+</nav>
+
+<header id="inicio">
+
+<img src="1logo.png">
+
+<h1>ModdyBot</h1>
+
+<p>
+Protege tu servidor y gestiona todo fácilmente.
+Anti-Raid, Anti-Spam, Anti-Links, Backups y mucho más.
+</p>
+
+<a data-target="comandos" class="cta-button">Ver Comandos</a>
 
 <a href="https://discord.com/oauth2/authorize?client_id=1450924184606740642&permissions=8&scope=bot" class="cta-button">
-🤖 Invitar Bot
-</a></header><section id="stats"><h2>Estadísticas de ModdyBot</h2><div class="stats"><div class="stat-box">
-<div class="stat-number">120+</div>
-<div class="stat-text">Servidores</div>
-</div><div class="stat-box">
-<div class="stat-number">25k+</div>
-<div class="stat-text">Usuarios protegidos</div>
-</div><div class="stat-box">
-<div class="stat-number">99.9%</div>
-<div class="stat-text">Tiempo activo</div>
-</div><div class="stat-box">
-<div class="stat-number">24/7</div>
-<div class="stat-text">Protección</div>
-</div></div></section><section id="funciona"><h2>¿Cómo funciona?</h2><div class="steps"><div class="step">
-<span>1️⃣</span>
-<h3>Invita el bot</h3>
-<p>Añade ModdyBot a tu servidor en segundos.</p>
-</div><div class="step">
-<span>2️⃣</span>
-<h3>Configura seguridad</h3>
-<p>Activa Anti-Raid, Anti-Spam y Anti-Links.</p>
-</div><div class="step">
-<span>3️⃣</span>
-<h3>Protección automática</h3>
-<p>El bot protege tu comunidad 24/7.</p>
-</div></div></section><section id="ventajas"><h2>¿Por qué usar ModdyBot?</h2><div class="features-grid"><div class="feature-box">
-<h3>🛡️ Seguridad Avanzada</h3>
-<p>Protección automática contra ataques y raids.</p>
-</div><div class="feature-box">
-<h3>⚡ Fácil de usar</h3>
-<p>Configuración rápida con comandos simples.</p>
-</div><div class="feature-box">
-<h3>🔧 Moderación</h3>
-<p>Herramientas completas para administrar tu servidor.</p>
-</div><div class="feature-box">
-<h3>🚀 Actualizaciones</h3>
-<p>Nuevas funciones añadidas constantemente.</p>
-</div></div></section><section id="faq"><h2>Preguntas Frecuentes</h2><div class="faq"><div class="faq-item">
-<h3>¿ModdyBot es gratis?</h3>
-<div class="faq-answer">
-Sí, el bot es completamente gratuito.
-</div>
-</div><div class="faq-item">
-<h3>¿Puede proteger mi servidor contra raids?</h3>
-<div class="faq-answer">
-Sí, ModdyBot tiene un sistema avanzado Anti-Raid.
-</div>
-</div><div class="faq-item">
-<h3>¿Tiene sistema de backups?</h3>
-<div class="faq-answer">
-Sí, puedes crear y restaurar backups del servidor.
-</div>
-</div></div></section><footer>
-© 2026 ModdyBot | NebulaBots Studio
-</footer><script>
+Invitar Bot
+</a>
 
-const particles=200
+</header>
+
+<section id="stats">
+
+<h2>Estadísticas</h2>
+
+<div class="stats">
+
+<div class="stat">
+<div class="stat-number" data-count="120">0</div>
+<div class="stat-text">Servidores</div>
+</div>
+
+<div class="stat">
+<div class="stat-number" data-count="25000">0</div>
+<div class="stat-text">Usuarios protegidos</div>
+</div>
+
+<div class="stat">
+<div class="stat-number" data-count="99">0</div>
+<div class="stat-text">% uptime</div>
+</div>
+
+</div>
+
+</section>
+
+<section id="comandos">
+
+<h2>Comandos Principales</h2>
+
+<div class="commands">
+
+<div class="command">
+<h3>/antiraid</h3>
+<p>Protección contra ataques.</p>
+<button data-info="Sistema automático que detecta raids y bloquea usuarios sospechosos.">Más info</button>
+</div>
+
+<div class="command">
+<h3>/antispam</h3>
+<p>Evita spam masivo.</p>
+<button data-info="Detecta mensajes repetidos y sanciona automáticamente.">Más info</button>
+</div>
+
+<div class="command">
+<h3>/antilinks</h3>
+<p>Bloquea enlaces externos.</p>
+<button data-info="Evita que usuarios envíen links peligrosos o spam.">Más info</button>
+</div>
+
+<div class="command">
+<h3>/backup</h3>
+<p>Crea backups del servidor.</p>
+<button data-info="Guarda roles, canales y configuraciones para restaurarlos luego.">Más info</button>
+</div>
+
+<div class="command">
+<h3>/verificacion</h3>
+<p>Captcha anti bots.</p>
+<button data-info="Sistema de verificación con captcha para nuevos miembros.">Más info</button>
+</div>
+
+</div>
+
+</section>
+
+<section id="soporte">
+
+<h2>Soporte</h2>
+
+<p>Únete a nuestro servidor o invita el bot.</p>
+
+<div class="discord-links">
+
+<a href="https://discord.gg/qrMnzGztm3">
+Servidor de soporte
+</a>
+
+<a href="https://discord.com/oauth2/authorize?client_id=1450924184606740642&permissions=8&scope=bot">
+Invitar ModdyBot
+</a>
+
+</div>
+
+</section>
+
+<footer>
+© 2026 ModdyBot | NebulaBots Studio
+</footer>
+
+<div class="overlay"></div>
+
+<div class="modal">
+<div class="modal-close">✕</div>
+<h3></h3>
+<p></p>
+</div>
+
+<script>
+
+/* partículas */
+
 const container=document.getElementById("particles")
 
-for(let i=0;i<particles;i++){
-
+for(let i=0;i<200;i++){
 let p=document.createElement("div")
-
 p.className="particle"
-
 p.style.left=Math.random()*100+"vw"
-
 p.style.top=Math.random()*100+"vh"
-
 p.style.animationDuration=(Math.random()*20+10)+"s"
-
 container.appendChild(p)
+}
+
+/* scroll navegación */
+
+document.querySelectorAll("[data-target]").forEach(link=>{
+link.addEventListener("click",()=>{
+let target=document.getElementById(link.dataset.target)
+window.scrollTo({
+top:target.offsetTop-80,
+behavior:"smooth"
+})
+})
+})
+
+/* animación secciones */
+
+const sections=document.querySelectorAll("section")
+
+function reveal(){
+
+sections.forEach(sec=>{
+if(sec.getBoundingClientRect().top<window.innerHeight-100){
+sec.classList.add("visible")
+}
+})
 
 }
 
+window.addEventListener("scroll",reveal)
+window.addEventListener("load",reveal)
 
-/* scroll */
+/* contador stats */
 
-const links=document.querySelectorAll('[data-target]')
+document.querySelectorAll(".stat-number").forEach(counter=>{
 
-links.forEach(link=>{
+let target=+counter.dataset.count
+let count=0
 
-link.addEventListener('click',e=>{
+let update=()=>{
+count+=target/100
+if(count<target){
+counter.textContent=Math.floor(count)
+requestAnimationFrame(update)
+}else{
+counter.textContent=target
+}
+}
 
-e.preventDefault()
-
-const target=document.getElementById(link.dataset.target)
-
-target.scrollIntoView({behavior:'smooth'})
+update()
 
 })
 
+/* barra scroll */
+
+window.addEventListener("scroll",()=>{
+let scroll=window.scrollY
+let height=document.body.scrollHeight-window.innerHeight
+document.getElementById("progress").style.width=(scroll/height)*100+"%"
 })
 
+/* modal */
 
-/* FAQ */
+const modal=document.querySelector(".modal")
+const overlay=document.querySelector(".overlay")
 
-document.querySelectorAll(".faq-item").forEach(item=>{
-item.addEventListener("click",()=>{
-let answer=item.querySelector(".faq-answer")
-answer.style.display=answer.style.display==="block"?"none":"block"
+document.querySelectorAll(".command button").forEach(btn=>{
+btn.onclick=()=>{
+modal.querySelector("h3").textContent=btn.parentElement.querySelector("h3").textContent
+modal.querySelector("p").textContent=btn.dataset.info
+modal.classList.add("active")
+overlay.classList.add("active")
+}
 })
-})
 
-</script></body>
-              </html> 
+document.querySelector(".modal-close").onclick=()=>{
+modal.classList.remove("active")
+overlay.classList.remove("active")
+}
+
+overlay.onclick=()=>{
+modal.classList.remove("active")
+overlay.classList.remove("active")
+}
+
+</script>
+
+</body>
+  </html>
