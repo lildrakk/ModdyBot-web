@@ -7,7 +7,6 @@
 <title>ModdyBot - Control Total para tu Servidor</title>
 
 <style>
-
 :root{
 --color-primario:#00ffff;
 --color-secundario:#1e90ff;
@@ -27,18 +26,6 @@ overflow-x:hidden;
 }
 
 a{text-decoration:none;color:inherit}
-
-/* barra progreso */
-
-#progress{
-position:fixed;
-top:0;
-left:0;
-height:4px;
-background:linear-gradient(90deg,var(--color-primario),var(--color-acento));
-width:0%;
-z-index:2000;
-}
 
 /* partículas */
 
@@ -107,12 +94,7 @@ header img{
 width:200px;
 border-radius:20px;
 box-shadow:0 0 40px var(--color-primario);
-animation:floatLogo 4s ease-in-out infinite alternate;
-}
-
-@keyframes floatLogo{
-0%{transform:translateY(0)}
-100%{transform:translateY(-20px)}
+/* animación removida */
 }
 
 header h1{
@@ -326,19 +308,19 @@ color:#777;
 
 <body>
 
-<div id="progress"></div>
 <div id="particles"></div>
 
 <nav>
 <a data-target="inicio">Inicio</a>
 <a data-target="stats">Estadísticas</a>
 <a data-target="comandos">Comandos</a>
+<a data-target="info">Quiénes Somos</a>
 <a data-target="soporte">Soporte</a>
 </nav>
 
 <header id="inicio">
 
-<img src="1logo.png">
+<img src="1logo.png" alt="Logo ModdyBot">
 
 <h1>ModdyBot</h1>
 
@@ -362,12 +344,12 @@ Invitar Bot
 <div class="stats">
 
 <div class="stat">
-<div class="stat-number" data-count="120">0</div>
+<div class="stat-number" data-count="42">0</div>
 <div class="stat-text">Servidores</div>
 </div>
 
 <div class="stat">
-<div class="stat-number" data-count="25000">0</div>
+<div class="stat-number" data-count="485">0</div>
 <div class="stat-text">Usuarios protegidos</div>
 </div>
 
@@ -420,6 +402,29 @@ Invitar Bot
 
 </section>
 
+<section id="info">
+
+<h2>Quiénes Somos</h2>
+
+<div class="info-box">
+<p><b>NebulaBots Studio</b> es un equipo dedicado al desarrollo de bots de Discord y herramientas para comunidades online. Nuestro objetivo es ofrecer sistemas avanzados de automatización, seguridad y gestión para servidores.</p>
+
+<p><b>ModdyBot</b> es uno de nuestros proyectos principales. Este bot está diseñado para ofrecer protección completa a servidores de Discord mediante sistemas como:</p>
+
+<ul>
+<li>Anti-Raid automático</li>
+<li>Sistema Anti-Spam inteligente</li>
+<li>Bloqueo de enlaces</li>
+<li>Backups completos del servidor</li>
+<li>Reaction Roles personalizadas</li>
+<li>Sistema de verificación con captcha</li>
+</ul>
+
+<p>Nuestro objetivo es ofrecer una herramienta potente pero fácil de usar para administradores de servidores. Seguimos desarrollando nuevas funciones constantemente para mejorar la seguridad y gestión de comunidades.</p>
+</div>
+
+</section>
+
 <section id="soporte">
 
 <h2>Soporte</h2>
@@ -428,13 +433,8 @@ Invitar Bot
 
 <div class="discord-links">
 
-<a href="https://discord.gg/qrMnzGztm3">
-Servidor de soporte
-</a>
-
-<a href="https://discord.com/oauth2/authorize?client_id=1450924184606740642&permissions=8&scope=bot">
-Invitar ModdyBot
-</a>
+<a href="https://discord.gg/qrMnzGztm3">Servidor de soporte</a>
+<a href="https://discord.com/oauth2/authorize?client_id=1450924184606740642&permissions=8&scope=bot">Invitar ModdyBot</a>
 
 </div>
 
@@ -455,9 +455,7 @@ Invitar ModdyBot
 <script>
 
 /* partículas */
-
 const container=document.getElementById("particles")
-
 for(let i=0;i<200;i++){
 let p=document.createElement("div")
 p.className="particle"
@@ -468,7 +466,6 @@ container.appendChild(p)
 }
 
 /* scroll navegación */
-
 document.querySelectorAll("[data-target]").forEach(link=>{
 link.addEventListener("click",()=>{
 let target=document.getElementById(link.dataset.target)
@@ -480,29 +477,21 @@ behavior:"smooth"
 })
 
 /* animación secciones */
-
 const sections=document.querySelectorAll("section")
-
 function reveal(){
-
 sections.forEach(sec=>{
 if(sec.getBoundingClientRect().top<window.innerHeight-100){
 sec.classList.add("visible")
 }
 })
-
 }
-
 window.addEventListener("scroll",reveal)
 window.addEventListener("load",reveal)
 
 /* contador stats */
-
 document.querySelectorAll(".stat-number").forEach(counter=>{
-
 let target=+counter.dataset.count
 let count=0
-
 let update=()=>{
 count+=target/100
 if(count<target){
@@ -512,21 +501,10 @@ requestAnimationFrame(update)
 counter.textContent=target
 }
 }
-
 update()
-
-})
-
-/* barra scroll */
-
-window.addEventListener("scroll",()=>{
-let scroll=window.scrollY
-let height=document.body.scrollHeight-window.innerHeight
-document.getElementById("progress").style.width=(scroll/height)*100+"%"
 })
 
 /* modal */
-
 const modal=document.querySelector(".modal")
 const overlay=document.querySelector(".overlay")
 
@@ -552,4 +530,4 @@ overlay.classList.remove("active")
 </script>
 
 </body>
-  </html>
+  </html> 
