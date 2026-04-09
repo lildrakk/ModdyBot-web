@@ -621,7 +621,7 @@ async def enviar_log_fallos_verificacion(
 
     embed = discord.Embed(
         title="<a:warning:1485072594012209354> Intentos fallidos de verificación",
-        color=discord.Color.red()
+        color=discord.Color(0x0A3D62)
     )
 
     embed.add_field(
