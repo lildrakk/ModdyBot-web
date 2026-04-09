@@ -151,19 +151,22 @@ class VerificationCog(commands.Cog):
     ):
 
         if not is_valid_panel_id(panel_id):
-            return await interaction.response.send_message(
+            await interaction.response.defer(ephemeral=True)
+            return await interaction.followup.send(
                 "<:X_:1476336151835967640> Ese ID de panel no es válido.",
                 ephemeral=True
             )
 
         if not canal or not isinstance(canal, discord.TextChannel):
-            return await interaction.response.send_message(
+            await interaction.response.defer(ephemeral=True)
+            return await interaction.followup.send(
                 "<:X_:1476336151835967640> El canal especificado no es válido.",
                 ephemeral=True
             )
 
         if not canal_logs or not isinstance(canal_logs, discord.TextChannel):
-            return await interaction.response.send_message(
+            await interaction.response.defer(ephemeral=True)
+            return await interaction.followup.send(
                 "<:X_:1476336151835967640> El canal de logs especificado no es válido.",
                 ephemeral=True
             )
@@ -215,19 +218,22 @@ class VerificationCog(commands.Cog):
         try:
             await canal.send(embed=embed, view=view)
         except:
-            return await interaction.response.send_message(
+            await interaction.response.defer(ephemeral=True)
+            return await interaction.followup.send(
                 "<:X_:1476336151835967640> No pude enviar el panel.",
                 ephemeral=True
             )
 
-        await interaction.response.send_message(
+        await interaction.response.defer(ephemeral=True)
+        await interaction.followup.send(
             "<a:ao_Tick:1485072554879357089> Panel creado correctamente.",
             ephemeral=True
         )
 
-    # ============================
-    # ENVIAR PANEL EXISTENTE
-    # ============================
+
+        # ============================
+        # ENVIAR PANEL EXISTENTE
+        # ============================
 
     @app_commands.command(
         name="verificacion_enviar",
@@ -236,13 +242,15 @@ class VerificationCog(commands.Cog):
     async def verificacion_enviar(self, interaction: discord.Interaction, panel_id: str, canal: discord.TextChannel):
 
         if not is_valid_panel_id(panel_id):
-            return await interaction.response.send_message(
+            await interaction.response.defer(ephemeral=True)
+            return await interaction.followup.send(
                 "<:X_:1476336151835967640> Ese ID de panel no es válido.",
                 ephemeral=True
             )
 
         if not canal or not isinstance(canal, discord.TextChannel):
-            return await interaction.response.send_message(
+            await interaction.response.defer(ephemeral=True)
+            return await interaction.followup.send(
                 "<:X_:1476336151835967640> El canal especificado no es válido.",
                 ephemeral=True
             )
@@ -252,7 +260,8 @@ class VerificationCog(commands.Cog):
         panel_id = sanitize_panel_id(panel_id.lower())
 
         if guild_id not in data or panel_id not in data[guild_id]:
-            return await interaction.response.send_message(
+            await interaction.response.defer(ephemeral=True)
+            return await interaction.followup.send(
                 "<:X_:1476336151835967640> Ese panel no existe.",
                 ephemeral=True
             )
@@ -286,12 +295,14 @@ class VerificationCog(commands.Cog):
         try:
             await canal.send(embed=embed, view=view)
         except:
-            return await interaction.response.send_message(
+            await interaction.response.defer(ephemeral=True)
+            return await interaction.followup.send(
                 "<:X_:1476336151835967640> No pude enviar el panel.",
                 ephemeral=True
             )
 
-        await interaction.response.send_message(
+        await interaction.response.defer(ephemeral=True)
+        await interaction.followup.send(
             "<a:ao_Tick:1485072554879357089> Panel enviado correctamente.",
             ephemeral=True
         )
@@ -314,7 +325,8 @@ class VerificationCog(commands.Cog):
         raw_id = custom.split("_", 1)[1]
 
         if not is_valid_panel_id(raw_id):
-            return await interaction.response.send_message(
+            await interaction.response.defer(ephemeral=True)
+            return await interaction.followup.send(
                 "<:X_:1476336151835967640> El ID de este panel es inválido.",
                 ephemeral=True
             )
@@ -324,7 +336,8 @@ class VerificationCog(commands.Cog):
         data = load_verification()
 
         if guild_id not in data or panel_id not in data[guild_id]:
-            return await interaction.response.send_message(
+            await interaction.response.defer(ephemeral=True)
+            return await interaction.followup.send(
                 "<:X_:1476336151835967640> Panel no encontrado.",
                 ephemeral=True
             )
@@ -336,7 +349,8 @@ class VerificationCog(commands.Cog):
         canal_logs = interaction.guild.get_channel(cfg.get("canal_logs"))
 
         if rol_dar and rol_dar in interaction.user.roles:
-            return await interaction.response.send_message(
+            await interaction.response.defer(ephemeral=True)
+            return await interaction.followup.send(
                 "<a:ao_Tick:1485072554879357089> Ya estás verificado.",
                 ephemeral=True
             )
@@ -352,7 +366,8 @@ class VerificationCog(commands.Cog):
                 if rol_dar:
                     await interaction.user.add_roles(rol_dar)
 
-                await interaction.response.send_message(
+                await interaction.response.defer(ephemeral=True)
+                await interaction.followup.send(
                     "<a:ao_Tick:1485072554879357089> Verificación completada.",
                     ephemeral=True
                 )
@@ -366,7 +381,8 @@ class VerificationCog(commands.Cog):
                 )
 
             except:
-                return await interaction.response.send_message(
+                await interaction.response.defer(ephemeral=True)
+                return await interaction.followup.send(
                     "<:X_:1476336151835967640> No pude asignar los roles.",
                     ephemeral=True
                 )
@@ -387,7 +403,8 @@ class VerificationCog(commands.Cog):
             hasta = self.cooldowns[key]
             if now < hasta:
                 restante = int(hasta - now)
-                return await interaction.response.send_message(
+                await interaction.response.defer(ephemeral=True)
+                return await interaction.followup.send(
                     f"<:X_:1476336151835967640> Has superado los intentos permitidos. Intenta en **{restante} segundos**.",
                     ephemeral=True
                 )
@@ -442,7 +459,7 @@ class VerificationCog(commands.Cog):
                             hasta_local = self_cog.cooldowns[k]
                             if ahora < hasta_local:
                                 restante_local = int(hasta_local - ahora)
-                                return await modal_interaction.response.send_message(
+                                return await modal_interaction.followup.send(
                                     f"<:X_:1476336151835967640> Espera **{restante_local} segundos**.",
                                     ephemeral=True
                                 )
@@ -460,7 +477,7 @@ class VerificationCog(commands.Cog):
                                 if rol_dar:
                                     await modal_interaction.user.add_roles(rol_dar)
 
-                                await modal_interaction.response.send_message(
+                                await modal_interaction.followup.send(
                                     "<a:ao_Tick:1485072554879357089> Verificación completada.",
                                     ephemeral=True
                                 )
@@ -474,7 +491,7 @@ class VerificationCog(commands.Cog):
                                 )
 
                             except:
-                                await modal_interaction.response.send_message(
+                                await modal_interaction.followup.send(
                                     "<:X_:1476336151835967640> No pude asignar los roles.",
                                     ephemeral=True
                                 )
@@ -484,7 +501,7 @@ class VerificationCog(commands.Cog):
                             self_cog.fallos[k] = intentos_actuales
 
                             if not max_fallos or not cooldown_fallos:
-                                return await modal_interaction.response.send_message(
+                                return await modal_interaction.followup.send(
                                     "<:X_:1476336151835967640> Código incorrecto.",
                                     ephemeral=True
                                 )
@@ -502,14 +519,13 @@ class VerificationCog(commands.Cog):
                                     cooldown_segundos=cooldown_fallos
                                 )
 
-                                return await modal_interaction.response.send_message(
+                                return await modal_interaction.followup.send(
                                     f"<:X_:1476336151835967640> Superaste los intentos. Intenta en **{cooldown_fallos} segundos**.",
                                     ephemeral=True
                                 )
 
-                            # Si aún no alcanzó el límite
                             else:
-                                return await modal_interaction.response.send_message(
+                                return await modal_interaction.followup.send(
                                     f"<:X_:1476336151835967640> **Código incorrecto, inténtalo de nuevo** "
                                     f"(Intentos: {intentos_actuales}/{max_fallos})",
                                     ephemeral=True
@@ -517,7 +533,6 @@ class VerificationCog(commands.Cog):
 
                 await i.response.send_modal(CaptchaModal())
 
-        
         await interaction.response.defer(ephemeral=True)
         await interaction.followup.send(
             embed=embed,
@@ -530,140 +545,140 @@ class VerificationCog(commands.Cog):
 # LOG DE VERIFICACIÓN
 # ============================
 
-async def enviar_log_verificacion(
-    self,
-    usuario: discord.Member,
-    guild: discord.Guild,
-    canal_logs: discord.TextChannel,
-    rol_dado=None,
-    rol_quitado=None
-):
-    if not canal_logs:
-        return
+    async def enviar_log_verificacion(
+        self,
+        usuario: discord.Member,
+        guild: discord.Guild,
+        canal_logs: discord.TextChannel,
+        rol_dado=None,
+        rol_quitado=None
+    ):
+        if not canal_logs:
+            return
 
-    embed = discord.Embed(
-        title="<a:ao_Tick:1485072554879357089> Usuario Verificado",
-        color=discord.Color(0x0A3D62)
-    )
-
-    embed.add_field(
-        name="<:user:1488971290302877967> Usuario",
-        value=f"{usuario.mention}",
-        inline=False
-    )
-
-    embed.add_field(
-        name="<:link:1483506560935268452> ID del usuario",
-        value=str(usuario.id),
-        inline=False
-    )
-
-    embed.add_field(
-        name="<:moderacion:1483506627649994812> Bot",
-        value=self.bot.user.mention,
-        inline=False
-    )
-
-    if rol_dado:
-        embed.add_field(
-            name="<:regalo:1483506548495093957> Rol asignado",
-            value=rol_dado.mention,
-            inline=False
+        embed = discord.Embed(
+            title="<a:ao_Tick:1485072554879357089> Usuario Verificado",
+            color=discord.Color.green()
         )
-    else:
+
         embed.add_field(
-            name="<:regalo:1483506548495093957> Rol asignado",
-            value="Ninguno",
+            name="<:anuncio:1483506577024614660> Usuario",
+            value=f"{usuario.mention}",
             inline=False
         )
 
-    if rol_quitado:
         embed.add_field(
-            name="<:basura:1483506530715439104> Rol retirado",
-            value=rol_quitado.mention,
-            inline=False
-        )
-    else:
-        embed.add_field(
-            name="<:basura:1483506530715439104> Rol retirado",
-            value="Ninguno",
+            name="<:link:1483506560935268452> ID del usuario",
+            value=str(usuario.id),
             inline=False
         )
 
-    embed.add_field(
-        name="<:discord:1483506738954244258> Servidor",
-        value=guild.name,
-        inline=False
-    )
+        embed.add_field(
+            name="<:escudo:1483506514399334441> Bot",
+            value=self.bot.user.mention,
+            inline=False
+        )
 
-    if usuario.avatar:
-        embed.set_thumbnail(url=usuario.avatar.url)
+        if rol_dado:
+            embed.add_field(
+                name="<:regalo:1483506548495093957> Rol asignado",
+                value=rol_dado.mention,
+                inline=False
+            )
+        else:
+            embed.add_field(
+                name="<:regalo:1483506548495093957> Rol asignado",
+                value="Ninguno",
+                inline=False
+            )
 
-    await canal_logs.send(embed=embed)
+        if rol_quitado:
+            embed.add_field(
+                name="<:basura:1483506530715439104> Rol retirado",
+                value=rol_quitado.mention,
+                inline=False
+            )
+        else:
+            embed.add_field(
+                name="<:basura:1483506530715439104> Rol retirado",
+                value="Ninguno",
+                inline=False
+            )
+
+        embed.add_field(
+            name="<:discord:1483506738954244258> Servidor",
+            value=guild.name,
+            inline=False
+        )
+
+        if usuario.avatar:
+            embed.set_thumbnail(url=usuario.avatar.url)
+
+        await canal_logs.send(embed=embed)
 
 # ============================
-# LOG DE INTENTOS FALLIDOS / COOLDOWN
+# LOG DE INTENTOS FALLIDOS
 # ============================
 
-async def enviar_log_fallos_verificacion(
-    self,
-    usuario: discord.Member,
-    guild: discord.Guild,
-    canal_logs: discord.TextChannel,
-    panel_id: str,
-    intentos: int,
-    cooldown_segundos: int
-):
-    if not canal_logs:
-        return
+    async def enviar_log_fallos_verificacion(
+        self,
+        usuario: discord.Member,
+        guild: discord.Guild,
+        canal_logs: discord.TextChannel,
+        panel_id: str,
+        intentos: int,
+        cooldown_segundos: int
+    ):
+        if not canal_logs:
+            return
 
-    ahora = datetime.datetime.utcnow().strftime("%d/%m/%Y %H:%M:%S")
+        ahora = datetime.datetime.utcnow().strftime("%d/%m/%Y %H:%M:%S")
 
-    embed = discord.Embed(
-        title="<a:warning:1485072594012209354> Intentos fallidos de verificación",
-        color=discord.Color(0x0A3D62)
-    )
+        embed = discord.Embed(
+            title="<a:warning:1485072594012209354> Intentos fallidos de verificación",
+            color=discord.Color.red()
+        )
 
-    embed.add_field(
-        name="<:anuncio:1483506577024614660> Usuario",
-        value=f"{usuario.mention} (`{usuario.id}`)",
-        inline=False
-    )
+        embed.add_field(
+            name="<:anuncio:1483506577024614660> Usuario",
+            value=f"{usuario.mention} (`{usuario.id}`)",
+            inline=False
+        )
 
-    embed.add_field(
-        name="<:link:1483506560935268452> Panel",
-        value=panel_id,
-        inline=False
-    )
+        embed.add_field(
+            name="<:link:1483506560935268452> Panel",
+            value=panel_id,
+            inline=False
+        )
 
-    embed.add_field(
-        name="<:basura:1483506530715439104> Intentos fallidos",
-        value=str(intentos),
-        inline=False
-    )
+        embed.add_field(
+            name="<:basura:1483506530715439104> Intentos fallidos",
+            value=str(intentos),
+            inline=False
+        )
 
-    embed.add_field(
-        name="<:escudo:1483506514399334441> Acción",
-        value=f"Cooldown activado ({cooldown_segundos}s)",
-        inline=False
-    )
+        embed.add_field(
+            name="<:escudo:1483506514399334441> Acción",
+            value=f"Cooldown activado ({cooldown_segundos}s)",
+            inline=False
+        )
 
-    embed.add_field(
-        name="<:reloj:1485698211795701961> Hora",
-        value=ahora + " (UTC)",
-        inline=False
-    )
+        embed.add_field(
+            name="<:reloj:1485698211795701961> Hora",
+            value=ahora + " (UTC)",
+            inline=False
+        )
 
-    embed.add_field(
-        name="<:discord:1483506738954244258> Servidor",
-        value=guild.name,
-        inline=False
-    )
+        embed.add_field(
+            name="<:discord:1483506738954244258> Servidor",
+            value=guild.name,
+            inline=False
+        )
 
-    if usuario.avatar:
-        embed.set_thumbnail(url=usuario.avatar.url)
+        if usuario.avatar:
+            embed.set_thumbnail(url=usuario.avatar.url)
 
-    await canal_logs.send(embed=embed)
+        await canal_logs.send(embed=embed)
 
 # ============================
 # SETUP DEL COG
