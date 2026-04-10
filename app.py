@@ -1,16 +1,46 @@
 import os
+import json
 import discord
 import psutil
 from datetime import datetime, timezone
 from discord import app_commands
 from discord.ext import commands
 from discord.ui import View, Button
+from dotenv import load_dotenv
+load_dotenv()
+
+# ==========================
+# CONFIG JSON
+# ==========================
+
+CONFIG_PATH = "config.json"
+
+def load_config():
+    if not os.path.exists(CONFIG_PATH):
+        default = {
+            "staff_roles": [],
+            "category_id": None,
+            "ticket_message": "Hola {user}, un miembro del staff te atenderá en breve.",
+            "ticket_color": 0x3498db,
+            "panel_title": "Panel de Soporte",
+            "panel_description": "Presiona el botón para abrir un ticket."
+        }
+        with open(CONFIG_PATH, "w") as f:
+            json.dump(default, f, indent=4)
+        return default
+
+    with open(CONFIG_PATH, "r") as f:
+        return json.load(f)
+
+def save_config():
+    with open(CONFIG_PATH, "w") as f:
+        json.dump(ticket_config, f, indent=4)
 
 # ==========================
 # CONFIG BÁSICA
 # ==========================
 
-TOKEN = os.getenv("TOKEN")  # Usa variable de entorno TOKEN
+TOKEN = os.getenv("TOKEN")
 GUILD_ID = 1491397564799385670
 
 intents = discord.Intents.default()
@@ -20,17 +50,10 @@ intents.guilds = True
 bot = commands.Bot(command_prefix="!", intents=intents)
 
 # ==========================
-# CONFIG DE TICKETS (MEMORIA)
+# CONFIG DE TICKETS (CARGADA DESDE JSON)
 # ==========================
 
-ticket_config = {
-    "staff_roles": [],  # IDs de roles staff
-    "category_id": None,  # ID de categoría donde crear tickets
-    "ticket_message": "Hola {user}, un miembro del staff te atenderá en breve.",
-    "ticket_color": 0x3498db,
-    "panel_title": "Panel de Soporte",
-    "panel_description": "Presiona el botón para abrir un ticket."
-}
+ticket_config = load_config()
 
 # ==========================
 # SETUP
@@ -133,29 +156,35 @@ async def ticket_config_cmd(
         if staff_rol.id not in ticket_config["staff_roles"]:
             ticket_config["staff_roles"].append(staff_rol.id)
         changed.append(f"➕ Rol staff añadido: {staff_rol.mention}")
+        save_config()
 
     if categoria is not None:
         ticket_config["category_id"] = categoria.id
         changed.append(f"📂 Categoría de tickets: {categoria.mention}")
+        save_config()
 
     if mensaje_ticket is not None:
         ticket_config["ticket_message"] = mensaje_ticket
         changed.append("💬 Mensaje inicial del ticket actualizado.")
+        save_config()
 
     if color_hex is not None:
         try:
             ticket_config["ticket_color"] = int(color_hex.replace("#", ""), 16)
             changed.append(f"🎨 Color del embed: {color_hex}")
+            save_config()
         except ValueError:
             return await interaction.response.send_message("❌ Color inválido. Usa formato HEX, por ejemplo: `#3498db`.", ephemeral=True)
 
     if panel_titulo is not None:
         ticket_config["panel_title"] = panel_titulo
         changed.append("📝 Título del panel actualizado.")
+        save_config()
 
     if panel_descripcion is not None:
         ticket_config["panel_description"] = panel_descripcion
         changed.append("📝 Descripción del panel actualizada.")
+        save_config()
 
     if not changed:
         return await interaction.response.send_message("No se ha cambiado nada en la configuración.", ephemeral=True)
@@ -164,7 +193,7 @@ async def ticket_config_cmd(
     await interaction.response.send_message(texto, ephemeral=True)
 
 # ==========================
-# VISTA DEL TICKET (BOTONES)
+# VISTA DEL TICKET
 # ==========================
 
 def es_staff(user: discord.Member) -> bool:
@@ -197,7 +226,7 @@ class TicketView(View):
         await interaction.channel.delete()
 
 # ==========================
-# PANEL CON BOTÓN (MEJORADO)
+# PANEL CON BOTÓN
 # ==========================
 
 class PanelView(View):
@@ -255,7 +284,7 @@ async def panel(interaction: discord.Interaction, canal: discord.TextChannel):
     await interaction.response.send_message(f"✅ Panel enviado a {canal.mention}", ephemeral=True)
 
 # ==========================
-# TICKETS (COMANDOS EXISTENTES)
+# COMANDOS ANTIGUOS
 # ==========================
 
 ticket = app_commands.Group(name="ticket", description="Gestión de tickets", guild_ids=[GUILD_ID])
@@ -292,8 +321,4 @@ bot.tree.add_command(ticket)
 # RUN
 # ==========================
 
-if __name__ == "__main__":
-    if not TOKEN:
-        print("❌ No se ha definido la variable de entorno TOKEN.")
-    else:
-        bot.run(TOKEN)
+bot.run(TOKEN)
