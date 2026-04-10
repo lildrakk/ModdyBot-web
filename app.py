@@ -7,6 +7,7 @@ from discord import app_commands
 from discord.ext import commands
 from discord.ui import View, Button
 from dotenv import load_dotenv
+
 load_dotenv()
 
 # ==========================
@@ -41,7 +42,7 @@ def save_config():
 # ==========================
 
 TOKEN = os.getenv("TOKEN")
-GUILD_ID = 1491397564799385670
+GUILD_ID = 1491397564799385670  # si quieres, luego lo usamos solo para cosas concretas
 
 intents = discord.Intents.default()
 intents.members = True
@@ -61,14 +62,14 @@ ticket_config = load_config()
 
 @bot.event
 async def on_ready():
-    await bot.tree.sync(guild=discord.Object(id=GUILD_ID))
+    await bot.tree.sync()  # sync global, sin duplicar por guild
     print(f"Bot listo como {bot.user}")
 
 # ==========================
 # PING
 # ==========================
 
-@bot.tree.command(name="ping", description="Latencia del bot", guild=discord.Object(id=GUILD_ID))
+@bot.tree.command(name="ping", description="Latencia del bot")
 async def ping(interaction: discord.Interaction):
     await interaction.response.send_message(f"Pong! {round(bot.latency*1000)}ms", ephemeral=True)
 
@@ -76,7 +77,7 @@ async def ping(interaction: discord.Interaction):
 # STATUS HOST
 # ==========================
 
-status = app_commands.Group(name="status", description="Estado del host", guild_ids=[GUILD_ID])
+status = app_commands.Group(name="status", description="Estado del host")
 
 @status.command(name="host", description="CPU, RAM, Disco, Uptime")
 async def host(interaction: discord.Interaction):
@@ -102,13 +103,13 @@ bot.tree.add_command(status)
 welcome_channel = None
 bye_channel = None
 
-@bot.tree.command(name="bienvenidas", description="Configura canal de bienvenida", guild=discord.Object(id=GUILD_ID))
+@bot.tree.command(name="bienvenidas", description="Configura canal de bienvenida")
 async def bienvenidas(interaction: discord.Interaction, canal: discord.TextChannel):
     global welcome_channel
     welcome_channel = canal.id
     await interaction.response.send_message("Canal de bienvenidas configurado.", ephemeral=True)
 
-@bot.tree.command(name="despedidas", description="Configura canal de despedida", guild=discord.Object(id=GUILD_ID))
+@bot.tree.command(name="despedidas", description="Configura canal de despedida")
 async def despedidas(interaction: discord.Interaction, canal: discord.TextChannel):
     global bye_channel
     bye_channel = canal.id
@@ -132,7 +133,7 @@ async def on_member_remove(member):
 # TICKET CONFIG
 # ==========================
 
-@bot.tree.command(name="ticket_config", description="Configura el sistema de tickets", guild=discord.Object(id=GUILD_ID))
+@bot.tree.command(name="ticket_config", description="Configura el sistema de tickets")
 @app_commands.describe(
     staff_rol="Rol de staff que podrá ver y gestionar tickets",
     categoria="Categoría donde se crearán los tickets",
@@ -156,38 +157,34 @@ async def ticket_config_cmd(
         if staff_rol.id not in ticket_config["staff_roles"]:
             ticket_config["staff_roles"].append(staff_rol.id)
         changed.append(f"➕ Rol staff añadido: {staff_rol.mention}")
-        save_config()
 
     if categoria is not None:
         ticket_config["category_id"] = categoria.id
         changed.append(f"📂 Categoría de tickets: {categoria.mention}")
-        save_config()
 
     if mensaje_ticket is not None:
         ticket_config["ticket_message"] = mensaje_ticket
         changed.append("💬 Mensaje inicial del ticket actualizado.")
-        save_config()
 
     if color_hex is not None:
         try:
             ticket_config["ticket_color"] = int(color_hex.replace("#", ""), 16)
             changed.append(f"🎨 Color del embed: {color_hex}")
-            save_config()
         except ValueError:
             return await interaction.response.send_message("❌ Color inválido. Usa formato HEX, por ejemplo: `#3498db`.", ephemeral=True)
 
     if panel_titulo is not None:
         ticket_config["panel_title"] = panel_titulo
         changed.append("📝 Título del panel actualizado.")
-        save_config()
 
     if panel_descripcion is not None:
         ticket_config["panel_description"] = panel_descripcion
         changed.append("📝 Descripción del panel actualizada.")
-        save_config()
 
     if not changed:
         return await interaction.response.send_message("No se ha cambiado nada en la configuración.", ephemeral=True)
+
+    save_config()
 
     texto = "**Configuración de tickets actualizada:**\n" + "\n".join(changed)
     await interaction.response.send_message(texto, ephemeral=True)
@@ -273,7 +270,7 @@ class PanelView(View):
 
         await interaction.response.send_message(f"✅ Ticket creado: {channel.mention}", ephemeral=True)
 
-@bot.tree.command(name="panel", description="Enviar panel de tickets a un canal", guild=discord.Object(id=GUILD_ID))
+@bot.tree.command(name="panel", description="Enviar panel de tickets a un canal")
 async def panel(interaction: discord.Interaction, canal: discord.TextChannel):
     embed = discord.Embed(
         title=ticket_config["panel_title"],
@@ -284,10 +281,10 @@ async def panel(interaction: discord.Interaction, canal: discord.TextChannel):
     await interaction.response.send_message(f"✅ Panel enviado a {canal.mention}", ephemeral=True)
 
 # ==========================
-# COMANDOS ANTIGUOS
+# GRUPO /ticket
 # ==========================
 
-ticket = app_commands.Group(name="ticket", description="Gestión de tickets", guild_ids=[GUILD_ID])
+ticket = app_commands.Group(name="ticket", description="Gestión de tickets")
 
 def is_ticket(ch: discord.abc.GuildChannel):
     return isinstance(ch, discord.TextChannel) and ch.name.startswith("ticket-")
