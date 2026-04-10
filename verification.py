@@ -450,6 +450,9 @@ class VerificationCog(commands.Cog):
                     async def on_submit(self, modal_interaction: discord.Interaction):
                         nonlocal codigo, max_fallos, cooldown_fallos, canal_logs
 
+                        # 🔥 NECESARIO PARA QUE FOLLOWUP FUNCIONE
+                        await modal_interaction.response.defer(ephemeral=True)
+
                         g_id = str(modal_interaction.guild.id)
                         u_id = modal_interaction.user.id
                         k = (g_id, panel_id, u_id)
