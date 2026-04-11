@@ -600,19 +600,19 @@ class BlacklistGlobal(commands.Cog):
         # DM
         try:
             embed = discord.Embed(
-                title="<a:alarmazul:1491858094043693177> Acceso denegado (ModdyBot)",
-                description=(
-                    "Has intentado entrar a un servidor donde está ModdyBot, "
-                    "pero estás **baneado globalmente**.\n\n"
-                    f"<:iinfo:1491858536895090708>**Razón:** raid\n"
-                    f"**Fecha del ban:** 2026-04-11 21:00\n"
-                    f"**Duración:** 2 meses\n\n"
-                    f"**Pruebas:**\n"
-                    + ("\n".join "No se adjuntaron pruebas.") +
-                    "\n\nSi quieres apelar tu sanción, entra al servidor de soporte:\n"
-                    f"{SUPPORT_INVITE}"
-                ),
-                color=discord.Color(0x0A3D62)
+    title="<a:alarmazul:1491858094043693177> Acceso denegado (ModdyBot)",
+    description=(
+        "Has intentado entrar a un servidor donde está ModdyBot, "
+        "pero estás **baneado globalmente**.\n\n"
+        f"<:iinfo:1491858536895090708> **Razón:** {razon}\n"
+        f"**Fecha del ban:** {fecha_ban}\n"
+        f"**Duración:** {duracion}\n\n"
+        f"**Pruebas:**\n"
+        + ("<a:flechazul:1492182951532826684> " + "\n".join(pruebas) if pruebas else "<a:flechazul:1492182951532826684> No se adjuntaron pruebas.")
+        + "\n\n"
+        f"Si quieres apelar tu sanción, entra al servidor de soporte:\n{SUPPORT_INVITE}"
+    ),
+    color=discord.Color(0x0A3D62)
             )
             if pruebas:
                 embed.set_image(url=pruebas[0])
