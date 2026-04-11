@@ -412,9 +412,19 @@ class VerificationCog(commands.Cog):
         codigo, imagen = generar_captcha()
 
         embed = discord.Embed(
-            title="<:escudo:1483506514399334441> Verificación con Captcha",
-            description=f"Fíjate bien en cada letra, tienes **{max_fallos} intentos**.",
-            color=discord.Color.blue()
+    title="<a:flechazul:1492182951532826684> Verificación con Captcha",
+    description=(
+        "Para completar la verificación, deberás resolver el siguiente **Captcha de seguridad**.\n\n"
+        "<:ruedita:1491491111557140570> **¿Qué debes hacer?**\n"
+        "• Observa atentamente el código que aparece en la imagen\n"
+        "• Escribe cada carácter exactamente como lo ves (mayúsculas incluidas)\n"
+        "• Pulsa el botón **Responder** para introducir tu código\n\n"
+        "<:candado:1491537429889552514> **Intentos permitidos**\n"
+        f"Dispones de **{max_fallos} intentos** antes de activar un bloqueo temporal.\n"
+        "Si fallas demasiadas veces, deberás esperar el tiempo indicado antes de volver a intentarlo.\n\n"
+        "<:nose:1491491155198607440> Este proceso ayuda a evitar bots, accesos no autorizados y cuentas de riesgo."
+    ),
+    color=discord.Color(0x0A3D62)
         )
 
         file = discord.File(imagen, filename="captcha.png")
@@ -450,7 +460,7 @@ class VerificationCog(commands.Cog):
                     async def on_submit(self, modal_interaction: discord.Interaction):
                         nonlocal codigo, max_fallos, cooldown_fallos, canal_logs
 
-                        # 🔥 NECESARIO PARA QUE FOLLOWUP FUNCIONE
+                        
                         await modal_interaction.response.defer(ephemeral=True)
 
                         g_id = str(modal_interaction.guild.id)
