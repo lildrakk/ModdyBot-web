@@ -235,18 +235,18 @@ class GlobalRemoveModal(discord.ui.Modal, title="➖ Eliminar de Blacklist Globa
                 pass
 
         embed = discord.Embed(
-            title="🔓 Usuario Desbaneado Globalmente (ModdyBot)",
+            title="<:nose:1491491155198607440> Usuario Desbaneado Globalmente (ModdyBot)",
             description=(
-                f"**ID:** `{uid}`\n\n"
-                f"**Razón original del ban:** {razon_original}\n"
-                f"**Fecha del ban:** {fecha_ban}\n"
-                f"**Fecha del desban:** {fecha_desban}\n\n"
-                f"**Pruebas:**\n"
+                f"<:link:1483506560935268452> **ID:** `{uid}`\n\n"
+                f"<:iinfo:1483506560935268452> **Razón original del ban:** {razon_original}\n"
+                f"<:calendario:1492176498197532725> *Fecha del ban:** {fecha_ban}\n"
+                f"<:ruedita:1491491111557140570> **Fecha del desban:** {fecha_desban}\n\n"
+                f"<a:flechazul:1492182951532826684> **Pruebas:**\n"
                 + ("\n".join(pruebas) if pruebas else "No se adjuntaron pruebas.") +
                 "\n\nSi quieres apelar tu sanción, entra al servidor de soporte:\n"
                 f"{SUPPORT_INVITE}"
             ),
-            color=discord.Color.green()
+            color=discord.Color(0x0A3D62)
         )
 
         if pruebas:
@@ -413,16 +413,18 @@ class GlobalBlacklistView(discord.ui.View):
         if value == "test_ban":
             fecha = datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
             embed_dm = discord.Embed(
-                title="🚫 Has sido baneado globalmente (SIMULACIÓN)",
+                title="<a:alarmazul:1491858094043693177> Has sido baneado globalmente (ModdyBot)",
                 description=(
-                    f"Esto es una **prueba** del mensaje que recibiría un usuario.\n\n"
-                    f"**Razón:** Prueba de sistema\n"
-                    f"**Fecha del ban:** {fecha}\n"
-                    f"**Duración:** 30 días (ejemplo)\n\n"
-                    f"**Pruebas:**\nNo se adjuntaron pruebas.\n\n"
-                    f"Si quieres apelar tu sanción, entra al servidor de soporte:\n{SUPPORT_INVITE}"
+                    f"Has sido añadido a la **Blacklist Global de ModdyBot**.\n\n"
+                    f"<:iinfo:1491858536895090708> **Razón:** {reason}\n"
+                    f"<:calendario:1492176498197532725> **Fecha del ban:** {timestamp}\n"
+                    f"<:cronometro:1492176494422659087> **Duración:** {duration_text}\n\n"
+                    f"<a:flechazul:1492182951532826684> **Pruebas:**\n"
+                    + ("\n".join(proofs) if proofs else "No se adjuntaron pruebas.") +
+                    "\n\nSi quieres apelar tu sanción, entra al servidor de soporte:\n"
+                    f"{SUPPORT_INVITE}"
                 ),
-                color=discord.Color.red()
+                color=discord.Color(0x0A3D62)
             )
             try:
                 await interaction.user.send(embed=embed_dm)
@@ -439,16 +441,18 @@ class GlobalBlacklistView(discord.ui.View):
             fecha_desban = datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
 
             embed = discord.Embed(
-                title="🔓 Usuario Desbaneado Globalmente (SIMULACIÓN)",
-                description=(
-                    f"**ID:** `{interaction.user.id}`\n\n"
-                    f"**Razón original del ban:** Prueba de sistema\n"
-                    f"**Fecha del ban:** {fecha_ban}\n"
-                    f"**Fecha del desban:** {fecha_desban}\n\n"
-                    "No se adjuntaron pruebas.\n\n"
-                    f"Si quieres apelar tu sanción, entra al servidor de soporte:\n{SUPPORT_INVITE}"
-                ),
-                color=discord.Color.green()
+                    title="<:nose:1491491155198607440> Usuario Desbaneado Globalmente (ModdyBot)",
+            description=(
+                f"<:link:1483506560935268452> **ID:** `{uid}`\n\n"
+                f"<:iinfo:1483506560935268452> **Razón original del ban:** {razon_original}\n"
+                f"<:calendario:1492176498197532725> *Fecha del ban:** {fecha_ban}\n"
+                f"<:ruedita:1491491111557140570> **Fecha del desban:** {fecha_desban}\n\n"
+                f"<a:flechazul:1492182951532826684> **Pruebas:**\n"
+                + ("\n".join(pruebas) if pruebas else "No se adjuntaron pruebas.") +
+                "\n\nSi quieres apelar tu sanción, entra al servidor de soporte:\n"
+                f"{SUPPORT_INVITE}"
+            ),
+            color=discord.Color(0x0A3D62)
             )
 
             try:
@@ -551,7 +555,7 @@ class BlacklistGlobal(commands.Cog):
                     "\n\nSi quieres apelar tu sanción, entra al servidor de soporte:\n"
                     f"{SUPPORT_INVITE}"
                 ),
-                color=discord.Color.red()
+                color=discord.Color(0x0A3D62)
             )
             if proofs:
                 embed.set_image(url=proofs[0])
@@ -600,11 +604,11 @@ class BlacklistGlobal(commands.Cog):
                 description=(
                     "Has intentado entrar a un servidor donde está ModdyBot, "
                     "pero estás **baneado globalmente**.\n\n"
-                    f"<:iinfo:1491858536895090708>**Razón:** {razon}\n"
-                    f"**Fecha del ban:** {fecha_ban}\n"
-                    f"**Duración:** {duracion}\n\n"
+                    f"<:iinfo:1491858536895090708>**Razón:** raid\n"
+                    f"**Fecha del ban:** 2026-04-11 21:00\n"
+                    f"**Duración:** 2 meses\n\n"
                     f"**Pruebas:**\n"
-                    + ("\n".join(pruebas) if pruebas else "No se adjuntaron pruebas.") +
+                    + ("\n".join "No se adjuntaron pruebas.") +
                     "\n\nSi quieres apelar tu sanción, entra al servidor de soporte:\n"
                     f"{SUPPORT_INVITE}"
                 ),
